@@ -1,0 +1,77 @@
+<section id="confirmacion" class="confirmacion-section">
+  <h2 class="titulo">Confirmación de asistencia</h2>
+
+  <p class="frase">
+    Nos aseguraremos de contar con tu presencia en este día tan especial
+  </p>
+
+  <form [formGroup]="form" (ngSubmit)="enviar()" novalidate>
+
+    <!-- Nombres -->
+    <div class="form-group">
+      <label>Nombres</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="nombres"
+        placeholder="Ej. Juan Carlos"
+      />
+      <small *ngIf="campoInvalido('nombres')">
+        Solo texto, máximo 10 palabras
+      </small>
+    </div>
+
+    <!-- Apellidos -->
+    <div class="form-group">
+      <label>Apellidos</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="apellidos"
+        placeholder="Ej. Pérez Gómez"
+      />
+      <small *ngIf="campoInvalido('apellidos')">
+        Solo texto, máximo 10 palabras
+      </small>
+    </div>
+
+    <!-- Confirmación -->
+    <div class="form-group">
+      <label class="radio-title">¿Confirmas tu asistencia?</label>
+
+      <div class="radio-group">
+        <label>
+          <input
+            type="radio"
+            value="SI_ASISTIRE"
+            formControlName="asistencia"
+          />
+          Sí, asistiré
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            value="NO_ASISTIRE"
+            formControlName="asistencia"
+          />
+          Lo siento, no podré asistir
+        </label>
+      </div>
+
+      <small *ngIf="campoInvalido('asistencia')">
+        Selecciona una opción
+      </small>
+    </div>
+
+    <!-- Botón -->
+    <button class="btn-enviar" type="submit" [disabled]="form.invalid">
+      Enviar confirmación
+    </button>
+
+    <p class="mensaje-ok" *ngIf="enviado">
+      ¡Gracias por confirmar! 💕
+    </p>
+
+  </form>
+</section>

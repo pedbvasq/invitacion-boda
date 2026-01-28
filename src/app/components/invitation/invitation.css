@@ -1,0 +1,43 @@
+#hero {
+  min-height: 100vh;
+  background: url('/hero_1.png') center / cover no-repeat;
+
+  display: grid;
+  place-items: center;
+}
+
+/* Tarjeta */
+.hero-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(0.5px);
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  max-width: 420px;
+  text-align: center;
+}
+
+/* Título */
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  letter-spacing: 4px;
+  color: #5a5a5a;
+  margin-bottom: 0.5rem;
+}
+
+/* Subtítulo */
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: #777;
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+  .hero-title {
+    font-size: 4.5rem;
+  }
+
+  .hero-card {
+    padding: 3rem;
+  }
+}

@@ -1,0 +1,121 @@
+#wedding {
+  position: relative;
+  background: #fff;
+  padding: 6rem 1.5rem;
+  overflow: hidden;
+}
+
+.wedding-content {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  color: #555;
+}
+
+.romantic-phrase {
+  font-style: italic;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.names {
+  font-family: cursive;
+  font-size: 2.2rem;
+  color: #f5c6d6;
+  margin-bottom: 2rem;
+}
+
+.save-date {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.date-box {
+  margin-bottom: 3rem;
+}
+
+.date-main {
+  display: block;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.date-sub {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* ⏱️ Contador */
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.time-box {
+  border: 1px solid #eee;
+  padding: 1rem 1.2rem;
+  min-width: 90px;
+  border-radius: 12px;
+}
+
+.time-box .number {
+  display: block;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.time-box .label {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #999;
+}
+
+/* 🌸 Flores */
+.flower {
+  position: absolute;
+  width: 300px;
+  opacity: 0.5;
+}
+
+.flower-top {
+  top: 0;
+  right: 0;
+   width: 500px;
+ opacity: 0.5;
+}
+
+.flower-bottom {
+  bottom: 0;
+  left: 0;
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 3rem;
+  }
+
+  .names {
+    font-size: 2.6rem;
+  }
+
+  .date-main {
+    font-size: 2.5rem;
+  }
+
+  .time-box {
+    min-width: 110px;
+  }
+}

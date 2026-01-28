@@ -1,0 +1,20 @@
+.wedding-footer {
+  background: #fafafa;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #777;
+  border-top: 1px solid #eee;
+}
+
+.wedding-footer a {
+  color: #c48fa0;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.wedding-footer a:hover {
+  color: #a96c82;
+  text-decoration: underline;
+}

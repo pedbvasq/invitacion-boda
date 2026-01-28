@@ -1,0 +1,78 @@
+.confirmacion-section {
+  background: #fff;
+  padding: 6rem 1.5rem;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.titulo {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.frase {
+  font-style: italic;
+  color: #777;
+  margin-bottom: 3rem;
+}
+
+.form-group {
+  margin-bottom: 1.8rem;
+  text-align: left;
+}
+
+label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+  color: #555;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 0.7rem;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 0.9rem;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.radio-group input {
+  margin-right: 0.5rem;
+}
+
+small {
+  color: #d9534f;
+  font-size: 0.7rem;
+}
+
+.btn-enviar {
+  margin-top: 1.5rem;
+  padding: 0.8rem 2.5rem;
+  border-radius: 30px;
+  border: none;
+  background: #c48fa0;
+  color: white;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+
+.btn-enviar:disabled {
+  opacity: 0.5;
+}
+
+.btn-enviar:hover:not(:disabled) {
+  background: #a96c82;
+}
+
+.mensaje-ok {
+  margin-top: 1.5rem;
+  color: #5cb85c;
+}
