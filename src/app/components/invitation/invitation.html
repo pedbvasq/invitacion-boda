@@ -1,18 +1,57 @@
 <section id="hero">
   <div class="hero-card">
-    <h1 class="hero-title">
-      {{ iniciales }}
-    </h1>
+    <div class="hero-title">
+      <div class="names-container">
+        <!-- Primer nombre: Inicial + letras adicionales -->
+        <div class="name-wrapper">
+          <span class="initial" [@initialFade]="initialM">{{ inicial1 }}</span>
+          <span class="additional-letters" *ngIf="showExpanding">
+            <span 
+              *ngFor="let letra of letrasAdicionales1; let i = index" 
+              class="letter"
+              [@letterExpand]="{ value: '', params: { delay: i * 50 } }">
+              {{ letra }}
+            </span>
+          </span>
+        </div>
+
+        <!-- Separador: Y que se convierte en flor -->
+        <div class="separator-wrapper">
+          <span class="y-letter" [@flowerBloom]="flowerState" [@yToFlower]="yState" *ngIf="!showFlowerInName">y</span>
+          <span class="flower-wrapper" *ngIf="showFlowerInName">
+            <svg class="flower-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <g class="petals">
+                <ellipse class="petal petal-1" cx="50" cy="25" rx="12" ry="20" fill="#f4c2d4"/>
+                <ellipse class="petal petal-2" cx="75" cy="50" rx="12" ry="20" fill="#f4c2d4" transform="rotate(90 50 50)"/>
+                <ellipse class="petal petal-3" cx="50" cy="75" rx="12" ry="20" fill="#f4c2d4"/>
+                <ellipse class="petal petal-4" cx="25" cy="50" rx="12" ry="20" fill="#f4c2d4" transform="rotate(90 50 50)"/>
+                <ellipse class="petal petal-5" cx="65" cy="35" rx="10" ry="18" fill="#f9d5e0" transform="rotate(45 50 50)"/>
+                <ellipse class="petal petal-6" cx="65" cy="65" rx="10" ry="18" fill="#f9d5e0" transform="rotate(135 50 50)"/>
+                <ellipse class="petal petal-7" cx="35" cy="65" rx="10" ry="18" fill="#f9d5e0" transform="rotate(225 50 50)"/>
+                <ellipse class="petal petal-8" cx="35" cy="35" rx="10" ry="18" fill="#f9d5e0" transform="rotate(315 50 50)"/>
+              </g>
+              <circle cx="50" cy="50" r="8" fill="#ffd700" class="flower-center"/>
+            </svg>
+          </span>
+        </div>
+
+        <!-- Segundo nombre: Inicial + letras adicionales -->
+        <div class="name-wrapper">
+          <span class="initial" [@initialFade]="initialJ">{{ inicial2 }}</span>
+          <span class="additional-letters" *ngIf="showExpanding">
+            <span 
+              *ngFor="let letra of letrasAdicionales2; let i = index" 
+              class="letter"
+              [@letterExpand]="{ value: '', params: { delay: i * 80 } }">
+              {{ letra }}
+            </span>
+          </span>
+        </div>
+      </div>
+    </div>
 
     <p class="hero-subtitle">
       Nos casamos
     </p>
-
-    <button
-      class="btn btn-outline-dark btn-lg mt-4"
-      (click)="scrollTo('intro')"
-    >
-      Ver invitación
-    </button>
   </div>
 </section>

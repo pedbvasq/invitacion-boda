@@ -1,0 +1,16 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Colección de confirmaciones
+    match /confirmaciones/{document} {
+      // Permitir que cualquiera pueda crear confirmaciones (formulario público)
+      allow create: if true;
+      
+      // Permitir lectura solo a usuarios autenticados (panel admin)
+      allow read: if request.auth != null;
+      
+      // No permitir actualización ni eliminación
+      allow update, delete: if false;
+    }
+  }
+}

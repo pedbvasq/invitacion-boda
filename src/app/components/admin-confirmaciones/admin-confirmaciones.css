@@ -1,0 +1,50 @@
+.admin-container {
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+
+.stats-card {
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.stats-card:hover {
+  transform: translateY(-5px);
+}
+
+.stats-si {
+  border-left: 5px solid #28a745;
+}
+
+.stats-no {
+  border-left: 5px solid #dc3545;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table-responsive {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.badge {
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+}
+
+.btn-success {
+  background: #28a745;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 500;
+}
+
+.btn-success:hover {
+  background: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+}

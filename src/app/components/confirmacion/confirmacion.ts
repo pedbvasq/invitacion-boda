@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-confirmacion',
@@ -16,7 +17,8 @@ export class Confirmacion {
 
   constructor(
     private fb: FormBuilder,
-    private firestore: Firestore
+    private firestore: Firestore,
+    private cdr: ChangeDetectorRef
   ) {
     this.form = this.fb.group({
       nombres: ['', [
@@ -46,12 +48,27 @@ export class Confirmacion {
       return;
     }
 
-    await addDoc(collection(this.firestore, 'confirmaciones'), {
-      ...this.form.value,
-      fecha: new Date()
-    });
+    try {
+      const formData = this.form.value;
+      
+      await addDoc(collection(this.firestore, 'confirmaciones'), {
+        nombres: formData.nombres,
+        apellidos: formData.apellidos,
+        asistencia: formData.asistencia === 'SI_ASISTIRE' ? 'Sí' : 'No',
+        fecha: new Date()
+      });
 
-    this.enviado = true;
-    this.form.reset();
+      this.form.reset();
+      this.enviado = true;
+      this.cdr.detectChanges();
+      
+      setTimeout(() => {
+        this.enviado = false;
+        this.cdr.detectChanges();
+      }, 5000);
+    } catch (error) {
+      console.error('Error al guardar:', error);
+      alert('Error al enviar la confirmación. Intenta nuevamente.');
+    }
   }
 }

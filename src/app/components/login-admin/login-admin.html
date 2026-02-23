@@ -1,0 +1,52 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2 class="text-center mb-4">🔐 Acceso Administrativo</h2>
+    
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input 
+          type="email" 
+          class="form-control" 
+          [class.is-invalid]="campoInvalido('email')"
+          id="email" 
+          formControlName="email"
+          placeholder="admin@ejemplo.com">
+        <div class="invalid-feedback" *ngIf="campoInvalido('email')">
+          <span *ngIf="loginForm.get('email')?.errors?.['required']">El email es requerido</span>
+          <span *ngIf="loginForm.get('email')?.errors?.['email']">Email inválido</span>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <input 
+          type="password" 
+          class="form-control"
+          [class.is-invalid]="campoInvalido('password')"
+          id="password" 
+          formControlName="password"
+          placeholder="••••••••">
+        <div class="invalid-feedback" *ngIf="campoInvalido('password')">
+          <span *ngIf="loginForm.get('password')?.errors?.['required']">La contraseña es requerida</span>
+          <span *ngIf="loginForm.get('password')?.errors?.['minlength']">Mínimo 6 caracteres</span>
+        </div>
+      </div>
+
+      <div class="alert alert-danger" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <button 
+        type="submit" 
+        class="btn btn-primary w-100"
+        [disabled]="loading">
+        <span *ngIf="!loading">Iniciar Sesión</span>
+        <span *ngIf="loading">
+          <span class="spinner-border spinner-border-sm me-2"></span>
+          Cargando...
+        </span>
+      </button>
+    </form>
+  </div>
+</div>
