@@ -46,6 +46,7 @@ export class Invitation implements OnInit, AfterViewInit {
   yState = 'y';
   showFlowerInName = false;
   showRomanticPhrase = false;
+  isPlaying = false;
 
   // Datos
   nombreCompleto1 = 'Hugo';
@@ -76,62 +77,68 @@ export class Invitation implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     if (!isPlatformBrowser(this.platformId)) return;
 
-    // Intentar reproducir el audio
-    if (this.audioPlayer?.nativeElement) {
-      this.audioPlayer.nativeElement.volume = 0.3;
-      this.audioPlayer.nativeElement.play().catch(() => {
-        // Si falla el autoplay, esperar interacción del usuario
-        document.addEventListener('click', () => {
-          this.audioPlayer?.nativeElement?.play();
-        }, { once: true });
-      });
-    }
-
-    // Usar requestAnimationFrame para evitar NG0100
+    // Doble requestAnimationFrame para evitar NG0100
     requestAnimationFrame(() => {
-      // Fase 1: Iniciales aparecen con stagger
-      setTimeout(() => {
-        this.initialM = 'visible';
-        this.cdr.detectChanges();
-      }, 100);
-      
-      setTimeout(() => {
-        this.initialJ = 'visible';
-        this.cdr.detectChanges();
-      }, 250);
-
-      // Fase 2: "Y" aparece
-      setTimeout(() => {
-        this.flowerState = 'visible';
-        this.cdr.detectChanges();
-      }, 1100);
-
-      // Fase 3: Expansión de nombres
-      setTimeout(() => {
-        this.showExpanding = true;
-        this.cdr.detectChanges();
-      }, 3500);
-
-      // Fase 4: Y se convierte en flor
-      setTimeout(() => {
-        this.yState = 'flower';
-        this.cdr.detectChanges();
+      requestAnimationFrame(() => {
+        // Fase 1: Iniciales aparecen con stagger
+        setTimeout(() => {
+          this.initialM = 'visible';
+          this.cdr.detectChanges();
+        }, 100);
         
         setTimeout(() => {
-          this.showFlowerInName = true;
+          this.initialJ = 'visible';
           this.cdr.detectChanges();
-        }, 600);
-      }, 4000);
+        }, 250);
 
-      // Fase 5: Frase romántica aparece
-      setTimeout(() => {
-        this.showRomanticPhrase = true;
-        this.cdr.detectChanges();
-      }, 5000);
+        // Fase 2: "Y" aparece
+        setTimeout(() => {
+          this.flowerState = 'visible';
+          this.cdr.detectChanges();
+        }, 1100);
+
+        // Fase 3: Expansión de nombres
+        setTimeout(() => {
+          this.showExpanding = true;
+          this.cdr.detectChanges();
+        }, 3500);
+
+        // Fase 4: Y se convierte en flor
+        setTimeout(() => {
+          this.yState = 'flower';
+          this.cdr.detectChanges();
+          
+          setTimeout(() => {
+            this.showFlowerInName = true;
+            this.cdr.detectChanges();
+          }, 600);
+        }, 4000);
+
+        // Fase 5: Frase romántica aparece
+        setTimeout(() => {
+          this.showRomanticPhrase = true;
+          this.cdr.detectChanges();
+        }, 5000);
+      });
     });
   }
 
   scrollTo(id: string) {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  toggleMusic() {
+    if (!this.audioPlayer?.nativeElement) return;
+
+    const audio = this.audioPlayer.nativeElement;
+    
+    if (this.isPlaying) {
+      audio.pause();
+      this.isPlaying = false;
+    } else {
+      audio.volume = 0.3;
+      audio.play();
+      this.isPlaying = true;
+    }
   }
 }

@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "y",
+    "public": "dist/boda-invitacion/browser",
     "ignore": [
       "firebase.json",
       "**/.*",
