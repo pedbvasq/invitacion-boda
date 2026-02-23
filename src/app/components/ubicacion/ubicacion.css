@@ -1,7 +1,7 @@
 .ubicacion-container {
     position: relative;
     background: #fff;
-    padding: 80px 20px;
+    padding: 60px 20px 40px;
     text-align: center;
     overflow: hidden;
 }
@@ -24,14 +24,16 @@
 }
 
 .subtitulo {
+    font-family: 'Lora', serif;
     font-size: 14px;
     color: #8c8c8c;
     margin-bottom: 10px;
 }
 
 .titulo {
+    font-family: 'Great Vibes', cursive;
     font-size: 28px;
-    font-weight: 500;
+    font-weight: 400;
     margin-bottom: 40px;
 }
 .card {
@@ -39,11 +41,29 @@
     border-radius: 20px;
     padding: 30px;
     width: 280px;
-    /* Nuevas propiedades para alinear */
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Empuja el contenido a los extremos */
-    min-height: 250px; /* Asegura que ambas tengan la misma altura mínima */
+    justify-content: space-between;
+    min-height: 250px;
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    14% {
+        transform: scale(1.05);
+    }
+    28% {
+        transform: scale(1);
+    }
+    42% {
+        transform: scale(1.05);
+    }
+    56% {
+        transform: scale(1);
+    }
 }
 .cards {
     display: flex;
@@ -59,18 +79,28 @@
     width: 280px;
 }
 
+.card:hover {
+    animation-play-state: paused;
+    transform: scale(1.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
 .card h4 {
+    font-family: 'Montserrat', sans-serif;
     font-size: 12px;
     letter-spacing: 1px;
     color: #c7a17a;
 }
 
 .card p {
+    font-family: 'Lora', serif;
     font-size: 18px;
     margin: 10px 0 20px;
 }
 
 .card button {
+    font-family: 'Montserrat', sans-serif;
     background: #c58b8b;
     border: none;
     color: #fff;
@@ -79,6 +109,7 @@
     cursor: pointer;
 }
 .location-btn {
+  font-family: 'Montserrat', sans-serif;
   display: inline-block;
   padding: 0.75rem 2rem;
   border-radius: 30px;

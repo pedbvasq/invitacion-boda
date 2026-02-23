@@ -1,2 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'bootstrap/dist/css/bootstrap.min.css';
+
+/* Tipografía Global */
+h1, .hero-title, .initial, .additional-letters, .letter {
+  font-family: 'Great Vibes', cursive;
+}
+
+h2, h3, .hero-subtitle {
+  font-family: 'Playfair Display', serif;
+}
+
+p, span, .text-content, label, small {
+  font-family: 'Lora', serif;
+}
+
+button, .btn, a.btn, input, select, textarea, .navbar {
+  font-family: 'Montserrat', sans-serif;
+}

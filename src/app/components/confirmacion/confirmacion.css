@@ -7,12 +7,14 @@
 }
 
 .titulo {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Great Vibes', cursive;
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
+  font-weight: 400;
 }
 
 .frase {
+  font-family: 'Lora', serif;
   font-style: italic;
   color: #777;
   margin-bottom: 3rem;
@@ -24,6 +26,7 @@
 }
 
 label {
+  font-family: 'Montserrat', sans-serif;
   display: block;
   font-size: 0.85rem;
   margin-bottom: 0.4rem;
@@ -31,6 +34,7 @@ label {
 }
 
 input[type="text"] {
+  font-family: 'Lora', serif;
   width: 100%;
   padding: 0.7rem;
   border-radius: 10px;
@@ -39,6 +43,7 @@ input[type="text"] {
 }
 
 .radio-group {
+  font-family: 'Lora', serif;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
@@ -49,11 +54,13 @@ input[type="text"] {
 }
 
 small {
+  font-family: 'Lora', serif;
   color: #d9534f;
   font-size: 0.7rem;
 }
 
 .btn-enviar {
+  font-family: 'Montserrat', sans-serif;
   margin-top: 1.5rem;
   padding: 0.8rem 2.5rem;
   border-radius: 30px;
@@ -73,6 +80,7 @@ small {
 }
 
 .mensaje-ok {
+  font-family: 'Lora', serif;
   margin-top: 1.5rem;
   color: #5cb85c;
 }

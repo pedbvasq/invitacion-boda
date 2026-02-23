@@ -9,7 +9,7 @@ import { Component, NgZone, OnDestroy, OnInit, signal } from '@angular/core';
 })
 export class Fecha implements OnInit, OnDestroy {
 
-  targetDate = new Date('2026-08-07T19:00:00');
+  targetDate = new Date('2026-08-15T13:30:00');
   timer: any;
 
   days = signal(0);

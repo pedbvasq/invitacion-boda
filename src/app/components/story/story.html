@@ -1,15 +1,15 @@
-<section id="story">
+<section id="story" #storySection>
   <div class="story-hero">
     <div class="story-content">
-      <p class="intro">
+      <p class="intro" [class.visible]="showIntro">
         Dos caminos, una historia y un amor que crece cada día.
       </p>
 
-      <h2 class="phrase">
+      <h2 class="phrase" [class.visible]="showPhrase">
         Hemos decidido decir <span>sí</span> para toda la vida
       </h2>
 
-      <p class="photo-text">
+      <p class="photo-text" [class.visible]="showPhotoText">
         Con la bendición de Dios y el amor de nuestras familias,
         comenzamos este nuevo capítulo juntos.
       </p>

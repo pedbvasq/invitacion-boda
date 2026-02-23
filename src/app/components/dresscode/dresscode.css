@@ -6,15 +6,17 @@
 }
 
 .subtitulo {
+  font-family: 'Lora', serif;
   font-style: italic;
   color: #777;
   margin-bottom: 0.5rem;
 }
 
 .titulo {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Great Vibes', cursive;
   font-size: 2.5rem;
   margin-bottom: 2rem;
+  font-weight: 400;
 }
 
 .info-card {
@@ -41,6 +43,7 @@
 }
 
 .destacado {
+  font-family: 'Playfair Display', serif;
   font-size: 1.2rem;
   font-weight: 600;
   color: #c59db3;
@@ -48,6 +51,7 @@
 }
 
 .texto {
+  font-family: 'Lora', serif;
   color: #555;
   font-size: 0.95rem;
 }
@@ -96,13 +100,12 @@
 .dresscode-section {
   position: relative;
   min-height: 50vh;
-  padding: 6rem 1.5rem;
+  padding: 4rem 1.5rem;
   opacity: 0.7;
   background-image: url('/fondo.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
   display: flex;
   align-items: center;
   justify-content: center;

@@ -13,25 +13,29 @@
 }
 
 .romantic-phrase {
+  font-family: 'Lora', serif;
   font-style: italic;
   font-size: 1rem;
   margin-bottom: 1.5rem;
 }
 
 .section-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Great Vibes', cursive;
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
+  font-weight: 400;
 }
 
 .names {
-  font-family: cursive;
+  font-family: 'Great Vibes', cursive;
   font-size: 2.2rem;
   color: #f5c6d6;
   margin-bottom: 2rem;
+  font-weight: 400;
 }
 
 .save-date {
+  font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
   letter-spacing: 3px;
   font-size: 0.85rem;
@@ -43,12 +47,14 @@
 }
 
 .date-main {
+  font-family: 'Playfair Display', serif;
   display: block;
   font-size: 2rem;
   font-weight: 600;
 }
 
 .date-sub {
+  font-family: 'Lora', serif;
   font-size: 1rem;
   opacity: 0.8;
 }
@@ -69,6 +75,7 @@
 }
 
 .time-box .number {
+  font-family: 'Playfair Display', serif;
   display: block;
   font-size: 2rem;
   font-weight: 600;
@@ -76,6 +83,7 @@
 }
 
 .time-box .label {
+  font-family: 'Montserrat', sans-serif;
   font-size: 0.75rem;
   letter-spacing: 2px;
   text-transform: uppercase;

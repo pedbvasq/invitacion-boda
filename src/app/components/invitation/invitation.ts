@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnInit, PLATFORM_ID, inject, ChangeDetectorRef } from '@angular/core';
+import { Component, AfterViewInit, OnInit, PLATFORM_ID, inject, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { trigger, state, style, transition, animate, query, stagger } from '@angular/animations';
 
@@ -33,6 +33,7 @@ import { trigger, state, style, transition, animate, query, stagger } from '@ang
   ]
 })
 export class Invitation implements OnInit, AfterViewInit {
+  @ViewChild('audioPlayer', { static: false }) audioPlayer?: ElementRef<HTMLAudioElement>;
   private platformId = inject(PLATFORM_ID);
   private cdr = inject(ChangeDetectorRef);
 
@@ -44,6 +45,7 @@ export class Invitation implements OnInit, AfterViewInit {
   showExpanding = false;
   yState = 'y';
   showFlowerInName = false;
+  showRomanticPhrase = false;
 
   // Datos
   nombreCompleto1 = 'Hugo';
@@ -68,44 +70,65 @@ export class Invitation implements OnInit, AfterViewInit {
     this.showExpanding = false;
     this.yState = 'y';
     this.showFlowerInName = false;
+    this.showRomanticPhrase = false;
   }
 
   ngAfterViewInit() {
     if (!isPlatformBrowser(this.platformId)) return;
 
-    // Fase 1: Iniciales aparecen con stagger
-    setTimeout(() => {
-      this.initialM = 'visible';
-      this.cdr.detectChanges();
-    }, 100);
-    
-    setTimeout(() => {
-      this.initialJ = 'visible';
-      this.cdr.detectChanges();
-    }, 250);
+    // Intentar reproducir el audio
+    if (this.audioPlayer?.nativeElement) {
+      this.audioPlayer.nativeElement.volume = 0.3;
+      this.audioPlayer.nativeElement.play().catch(() => {
+        // Si falla el autoplay, esperar interacción del usuario
+        document.addEventListener('click', () => {
+          this.audioPlayer?.nativeElement?.play();
+        }, { once: true });
+      });
+    }
 
-    // Fase 2: "Y" aparece
-    setTimeout(() => {
-      this.flowerState = 'visible';
-      this.cdr.detectChanges();
-    }, 1100);
-
-    // Fase 3: Expansión de nombres
-    setTimeout(() => {
-      this.showExpanding = true;
-      this.cdr.detectChanges();
-    }, 3500);
-
-    // Fase 4: Y se convierte en flor
-    setTimeout(() => {
-      this.yState = 'flower';
-      this.cdr.detectChanges();
+    // Usar requestAnimationFrame para evitar NG0100
+    requestAnimationFrame(() => {
+      // Fase 1: Iniciales aparecen con stagger
+      setTimeout(() => {
+        this.initialM = 'visible';
+        this.cdr.detectChanges();
+      }, 100);
       
       setTimeout(() => {
-        this.showFlowerInName = true;
+        this.initialJ = 'visible';
         this.cdr.detectChanges();
-      }, 600);
-    }, 4000);
+      }, 250);
+
+      // Fase 2: "Y" aparece
+      setTimeout(() => {
+        this.flowerState = 'visible';
+        this.cdr.detectChanges();
+      }, 1100);
+
+      // Fase 3: Expansión de nombres
+      setTimeout(() => {
+        this.showExpanding = true;
+        this.cdr.detectChanges();
+      }, 3500);
+
+      // Fase 4: Y se convierte en flor
+      setTimeout(() => {
+        this.yState = 'flower';
+        this.cdr.detectChanges();
+        
+        setTimeout(() => {
+          this.showFlowerInName = true;
+          this.cdr.detectChanges();
+        }, 600);
+      }, 4000);
+
+      // Fase 5: Frase romántica aparece
+      setTimeout(() => {
+        this.showRomanticPhrase = true;
+        this.cdr.detectChanges();
+      }, 5000);
+    });
   }
 
   scrollTo(id: string) {
