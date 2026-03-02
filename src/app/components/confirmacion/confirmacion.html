@@ -1,77 +1,68 @@
 <section id="confirmacion" class="confirmacion-section">
-  <h2 class="titulo">Confirmación de asistencia</h2>
+  @if (loading) {
+    <div class="text-center py-5">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+    </div>
+  }
 
-  <p class="frase">
-    Nos aseguraremos de contar con tu presencia en este día tan especial
-  </p>
+  @if (!loading && !guestId) {
+    <h2 class="titulo">Confirmación de asistencia</h2>
+    <p class="frase">
+      Para confirmar tu asistencia, utiliza el link personalizado que recibiste
+    </p>
+  }
 
-  <form [formGroup]="form" (ngSubmit)="enviar()" novalidate>
-
-    <!-- Nombres -->
-    <div class="form-group">
-      <label>Nombres</label>
-      <input
-        type="text"
-        class="form-control"
-        formControlName="nombres"
-        placeholder="Ej. Juan Carlos"
-      />
-      <small *ngIf="campoInvalido('nombres')">
-        Solo texto, máximo 10 palabras
-      </small>
+  @if (guest && !loading && !error) {
+    <h2 class="titulo">Confirmación de asistencia</h2>
+    
+    <div class="guest-info">
+      <h3>{{guest.nombres}} {{guest.apellidos}}</h3>
+      <p class="frase">Puedes traer hasta {{guest.cupoPermitido}} persona(s)</p>
     </div>
 
-    <!-- Apellidos -->
-    <div class="form-group">
-      <label>Apellidos</label>
-      <input
-        type="text"
-        class="form-control"
-        formControlName="apellidos"
-        placeholder="Ej. Pérez Gómez"
-      />
-      <small *ngIf="campoInvalido('apellidos')">
-        Solo texto, máximo 10 palabras
-      </small>
-    </div>
-
-    <!-- Confirmación -->
-    <div class="form-group">
-      <label class="radio-title">¿Confirmas tu asistencia?</label>
-
-      <div class="radio-group">
-        <label>
-          <input
-            type="radio"
-            value="SI_ASISTIRE"
-            formControlName="asistencia"
-          />
-          Sí, asistiré
-        </label>
-
-        <label>
-          <input
-            type="radio"
-            value="NO_ASISTIRE"
-            formControlName="asistencia"
-          />
-          Lo siento, no podré asistir
-        </label>
+    @if (!confirmado) {
+      <div class="form-group">
+        <label class="radio-title">¿Cuántas personas asistirán?</label>
+        <select class="form-control" [(ngModel)]="personasConfirmadas">
+          @for (num of personasOptions; track num) {
+            <option [value]="num">{{num}}</option>
+          }
+        </select>
       </div>
 
-      <small *ngIf="campoInvalido('asistencia')">
-        Selecciona una opción
-      </small>
+      <button class="btn-enviar" (click)="confirmar()">
+        Confirmar Asistencia
+      </button>
+    } @else {
+      <p class="mensaje-ok">
+        ¡Gracias por confirmar! 💕<br>
+        Has confirmado la asistencia de {{personasConfirmadas}} persona(s)
+      </p>
+
+      <!-- Teléfono comentado temporalmente
+      @if (!guest.telefono) {
+        <div class="mt-4">
+          <p class="frase">¿Deseas recibir recordatorios por WhatsApp? (Opcional)</p>
+          <div class="form-group">
+            <input type="tel" class="form-control" placeholder="Ej: 0997122244" #telefonoInput>
+            <button class="btn-enviar mt-2" (click)="guardarTelefono(telefonoInput.value)">
+              Guardar Teléfono
+            </button>
+          </div>
+        </div>
+      } @else {
+        <p class="frase mt-3">✅ Teléfono registrado: {{guest.telefono}}</p>
+      }
+      -->
+    }
+  }
+
+  @if (error && !loading) {
+    <div class="alert alert-danger text-center">
+      <h4>Invitación no encontrada</h4>
+      <p>El link de invitación no es válido.</p>
     </div>
-
-    <!-- Botón -->
-    <button class="btn-enviar" type="submit" [disabled]="form.invalid">
-      Enviar confirmación
-    </button>
-
-    <p class="mensaje-ok" *ngIf="enviado">
-      ¡Gracias por confirmar! 💕
-    </p>
-
-  </form>
+  }
 </section>

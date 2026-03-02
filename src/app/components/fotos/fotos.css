@@ -1,0 +1,58 @@
+.fotos-section {
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+}
+
+.titulo {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  color: #8b7355;
+  margin-bottom: 20px;
+}
+
+.frase {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 30px;
+  line-height: 1.8;
+}
+
+.btn-subir-fotos {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-subir-fotos:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.instrucciones {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .titulo {
+    font-size: 2rem;
+  }
+  
+  .frase {
+    font-size: 1rem;
+  }
+  
+  .btn-subir-fotos {
+    padding: 12px 30px;
+    font-size: 1rem;
+  }
+}

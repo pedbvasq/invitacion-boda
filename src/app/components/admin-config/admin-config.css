@@ -1,0 +1,34 @@
+.instrucciones {
+  line-height: 1.8;
+  padding-left: 20px;
+}
+
+.instrucciones li {
+  margin-bottom: 20px;
+}
+
+.instrucciones strong {
+  color: #667eea;
+  font-size: 1.1rem;
+}
+
+.instrucciones p {
+  margin: 5px 0;
+  color: #666;
+}
+
+.instrucciones code {
+  background: #f4f4f4;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.instrucciones a {
+  color: #667eea;
+  text-decoration: none;
+}
+
+.instrucciones a:hover {
+  text-decoration: underline;
+}

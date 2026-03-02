@@ -1,7 +1,10 @@
 import { Routes } from '@angular/router';
 import { Home } from './components/home/home';
 import { LoginAdmin } from './components/login-admin/login-admin';
-import { AdminConfirmaciones } from './components/admin-confirmaciones/admin-confirmaciones';
+import { AdminGuests } from './components/admin-guests/admin-guests';
+import { AdminConfig } from './components/admin-config/admin-config';
+import { AdminReminders } from './components/admin-reminders/admin-reminders';
+import { GuestConfirmation } from './components/guest-confirmation/guest-confirmation';
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
@@ -14,12 +17,27 @@ export const routes: Routes = [
     component: LoginAdmin
   },
   {
-    path: 'admin',
-    component: AdminConfirmaciones,
+    path: 'admin/guests',
+    component: AdminGuests,
     canActivate: [authGuard]
   },
   {
-    path: '**',
-    redirectTo: ''
+    path: 'admin/config',
+    component: AdminConfig,
+    canActivate: [authGuard]
+  },
+  // {
+  //   path: 'admin/reminders',
+  //   component: AdminReminders,
+  //   canActivate: [authGuard]
+  // },
+  {
+    path: 'admin',
+    redirectTo: 'admin/guests',
+    pathMatch: 'full'
+  },
+  {
+    path: ':id',
+    component: Home
   }
 ];

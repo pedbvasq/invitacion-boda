@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,39 +6,32 @@ import { GuestService } from '../../services/guest.service';
 import { Guest } from '../../models/guest.model';
 
 @Component({
-  selector: 'app-confirmacion',
+  selector: 'app-guest-confirmation',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './confirmacion.html',
-  styleUrl: './confirmacion.css',
+  templateUrl: './guest-confirmation.html',
+  styleUrl: './guest-confirmation.css'
 })
-export class Confirmacion implements OnInit {
+export class GuestConfirmation implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private guestService = inject(GuestService);
-  private cdr = inject(ChangeDetectorRef);
 
   guest: Guest | null = null;
   loading = true;
   error = false;
   personasConfirmadas = 1;
   confirmado = false;
-  guestId: string | null = null;
 
-  ngOnInit() {
-    setTimeout(() => this.loadGuest(), 0);
-  }
-
-  async loadGuest() {
-    this.guestId = this.route.snapshot.paramMap.get('id');
-    
-    if (!this.guestId) {
+  async ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (!id) {
+      this.error = true;
       this.loading = false;
-      this.cdr.detectChanges();
       return;
     }
 
-    this.guest = await this.guestService.getGuestById(this.guestId);
+    this.guest = await this.guestService.getGuestById(id);
     this.loading = false;
 
     if (!this.guest) {
@@ -47,8 +40,6 @@ export class Confirmacion implements OnInit {
       this.confirmado = true;
       this.personasConfirmadas = this.guest.personasConfirmadas;
     }
-    
-    this.cdr.detectChanges();
   }
 
   async confirmar() {
@@ -59,19 +50,9 @@ export class Confirmacion implements OnInit {
 
     await this.guestService.confirmGuest(this.guest.id!, this.personasConfirmadas);
     this.confirmado = true;
-    this.cdr.detectChanges();
   }
 
-  // Método comentado temporalmente - para recordatorios futuros
-  // async guardarTelefono(telefono: string) {
-  //   if (!this.guest?.id) return;
-  //   await this.guestService.updateGuest(this.guest.id, { telefono });
-  //   this.guest.telefono = telefono;
-  //   this.cdr.detectChanges();
-  // }
-
   get personasOptions() {
-    if (!this.guest) return [1];
-    return Array.from({ length: this.guest.cupoPermitido }, (_, i) => i + 1);
+    return Array.from({ length: this.guest?.cupoPermitido || 1 }, (_, i) => i + 1);
   }
 }

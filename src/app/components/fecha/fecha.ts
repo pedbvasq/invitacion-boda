@@ -1,4 +1,4 @@
-import { Component, NgZone, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, NgZone, OnDestroy, OnInit, signal, ChangeDetectorRef, inject } from '@angular/core';
 
 @Component({
   selector: 'app-fecha',
@@ -8,6 +8,8 @@ import { Component, NgZone, OnDestroy, OnInit, signal } from '@angular/core';
   styleUrl: './fecha.css',
 })
 export class Fecha implements OnInit, OnDestroy {
+  private ngZone = inject(NgZone);
+  private cdr = inject(ChangeDetectorRef);
 
   targetDate = new Date('2026-08-15T13:30:00');
   timer: any;
@@ -18,14 +20,19 @@ export class Fecha implements OnInit, OnDestroy {
   seconds = signal(0);
 
   ngOnInit(): void {
-    this.updateCountdown(); // 👈 inicial
-    this.timer = setInterval(() => {
-      this.updateCountdown();
-    }, 1000);
+    this.updateCountdown();
+    this.ngZone.runOutsideAngular(() => {
+      this.timer = setInterval(() => {
+        this.updateCountdown();
+        this.cdr.detectChanges();
+      }, 1000);
+    });
   }
 
   ngOnDestroy(): void {
-    clearInterval(this.timer);
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
   }
 
   updateCountdown() {

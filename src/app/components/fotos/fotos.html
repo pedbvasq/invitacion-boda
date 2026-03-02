@@ -1,0 +1,22 @@
+<section id="fotos" class="fotos-section">
+  @if (!loading && googlePhotosLink) {
+    <div class="container text-center">
+      <h2 class="titulo">📸 Comparte tus Fotos</h2>
+      <p class="frase">
+        ¡Queremos ver la boda desde tu perspectiva!<br>
+        Sube tus fotos y videos del gran día
+      </p>
+      
+      <button class="btn-subir-fotos" (click)="abrirGooglePhotos()">
+        📤 Subir Mis Fotos
+      </button>
+
+      <p class="instrucciones mt-3">
+        <small>
+          Al hacer clic, se abrirá Google Photos donde podrás subir tus fotos.<br>
+          Por favor, incluye tu nombre en la descripción de las fotos.
+        </small>
+      </p>
+    </div>
+  }
+</section>

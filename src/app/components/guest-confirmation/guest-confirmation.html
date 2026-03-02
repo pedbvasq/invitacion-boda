@@ -1,0 +1,54 @@
+<div class="confirmation-container">
+  @if (loading) {
+    <div class="text-center py-5">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+    </div>
+  }
+
+  @if (error) {
+    <div class="alert alert-danger text-center">
+      <h4>Invitación no encontrada</h4>
+      <p>El link de invitación no es válido o ha expirado.</p>
+    </div>
+  }
+
+  @if (guest && !loading && !error) {
+    <div class="card">
+      <div class="card-body text-center">
+        <h2 class="mb-4">🎉 Invitación de Boda</h2>
+        
+        <div class="guest-info mb-4">
+          <h4>{{guest.nombres}} {{guest.apellidos}}</h4>
+          <p class="text-muted">Puedes traer hasta {{guest.cupoPermitido}} persona(s)</p>
+        </div>
+
+        @if (!confirmado) {
+          <div class="confirmation-form">
+            <h5 class="mb-3">¿Confirmas tu asistencia?</h5>
+            
+            <div class="mb-3">
+              <label class="form-label">¿Cuántas personas asistirán?</label>
+              <select class="form-select" [(ngModel)]="personasConfirmadas">
+                @for (num of personasOptions; track num) {
+                  <option [value]="num">{{num}}</option>
+                }
+              </select>
+            </div>
+
+            <button class="btn btn-success btn-lg" (click)="confirmar()">
+              ✅ Confirmar Asistencia
+            </button>
+          </div>
+        } @else {
+          <div class="alert alert-success">
+            <h4>✅ ¡Confirmación Exitosa!</h4>
+            <p>Has confirmado la asistencia de {{personasConfirmadas}} persona(s)</p>
+            <p class="mb-0">¡Nos vemos en la boda! 💒</p>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>

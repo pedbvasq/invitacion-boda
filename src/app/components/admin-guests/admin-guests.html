@@ -1,0 +1,131 @@
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Gestión de Invitados</h2>
+    <div class="d-flex gap-2">
+      <button class="btn btn-secondary" routerLink="/admin/config">⚙️ Configuración</button>
+      <!-- <button class="btn btn-info" routerLink="/admin/reminders">📱 Recordatorios</button> -->
+      <button class="btn btn-danger" (click)="logout()">Cerrar Sesión</button>
+    </div>
+  </div>
+
+  <!-- Estadísticas -->
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5>Total Invitados</h5>
+          <h2>{{totalInvitados}}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5>Confirmados</h5>
+          <h2>{{confirmados}}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5>Total Personas</h5>
+          <h2>{{totalPersonas}}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Acciones -->
+  <div class="mb-3 d-flex gap-2 flex-wrap">
+    <button class="btn btn-primary" (click)="showAddForm = !showAddForm">
+      {{ showAddForm ? 'Cancelar' : '+ Agregar Invitado' }}
+    </button>
+    <button class="btn btn-success" (click)="downloadTemplate()">📥 Descargar Plantilla</button>
+    <label class="btn btn-info">
+      📤 Subir Excel
+      <input type="file" accept=".xlsx,.xls" (change)="uploadExcel($event)" hidden>
+    </label>
+    <button class="btn btn-secondary" (click)="exportGuests()">📊 Exportar Lista</button>
+    <button class="btn btn-danger" (click)="deleteAllGuests()">🗑️ Eliminar Todos</button>
+  </div>
+
+  <!-- Filtro -->
+  <div class="mb-3">
+    <select class="form-select" [(ngModel)]="filtroEstado">
+      <option value="todos">Todos los invitados</option>
+      <option value="confirmados">Solo confirmados</option>
+      <option value="pendientes">Solo pendientes</option>
+    </select>
+  </div>
+
+  <!-- Formulario Agregar/Editar -->
+  @if (showAddForm) {
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5>{{ editingGuest ? 'Editar' : 'Agregar' }} Invitado</h5>
+        <div class="row">
+          <div class="col-md-4">
+            <input type="text" class="form-control" placeholder="Nombres" [(ngModel)]="nombres">
+          </div>
+          <div class="col-md-4">
+            <input type="text" class="form-control" placeholder="Apellidos" [(ngModel)]="apellidos">
+          </div>
+          <div class="col-md-2">
+            <input type="number" class="form-control" placeholder="Cupo" [(ngModel)]="cupoPermitido" min="1">
+          </div>
+          <div class="col-md-2">
+            @if (editingGuest) {
+              <button class="btn btn-success w-100" (click)="saveEdit()">Guardar</button>
+            } @else {
+              <button class="btn btn-primary w-100" (click)="addGuest()">Agregar</button>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Tabla de Invitados -->
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nombres</th>
+          <th>Apellidos</th>
+          <th>Cupo</th>
+          <th>Estado</th>
+          <th>Confirmadas</th>
+          <th>Link</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (guest of guestsFiltrados; track guest.id) {
+          <tr>
+            <td>{{guest.nombres}}</td>
+            <td>{{guest.apellidos}}</td>
+            <td>{{guest.cupoPermitido}}</td>
+            <td>
+              @if (guest.confirmado) {
+                <span class="badge bg-success">Confirmado</span>
+              } @else {
+                <span class="badge bg-warning">Pendiente</span>
+              }
+            </td>
+            <td>{{guest.personasConfirmadas}}</td>
+            <td>
+              <button class="btn btn-sm btn-outline-primary" (click)="copyLink(guest.id!)">
+                📋 Copiar
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-sm btn-warning me-1" (click)="editGuest(guest)">✏️</button>
+              <button class="btn btn-sm btn-danger" (click)="deleteGuest(guest.id!)">🗑️</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

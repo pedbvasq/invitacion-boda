@@ -1,0 +1,90 @@
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Recordatorios por WhatsApp</h2>
+    <div class="d-flex gap-2">
+      <button class="btn btn-secondary" routerLink="/admin/guests">← Invitados</button>
+      <button class="btn btn-danger" (click)="logout()">Cerrar Sesión</button>
+    </div>
+  </div>
+
+  @if (loading) {
+    <div class="text-center py-5">
+      <div class="spinner-border"></div>
+    </div>
+  } @else {
+    <!-- Estadísticas -->
+    <div class="alert alert-info">
+      📱 {{guestesConTelefono}} invitados confirmados con teléfono registrado
+    </div>
+
+    <!-- Configuración -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5>Configuración de Recordatorios</h5>
+
+        <!-- Frecuencia -->
+        <div class="mb-3">
+          <label class="form-label">Frecuencia</label>
+          <select class="form-select" [(ngModel)]="config.frecuencia">
+            <option value="mensual">1 vez por mes</option>
+            <option value="quincenal">Quincenal</option>
+            <option value="semanal">Faltando 1 semana</option>
+          </select>
+        </div>
+
+        <!-- Día del mes (solo para mensual) -->
+        @if (config.frecuencia === 'mensual') {
+          <div class="mb-3">
+            <label class="form-label">Día del mes</label>
+            <input type="number" class="form-control" [(ngModel)]="config.diaMensual" min="1" max="28">
+          </div>
+        }
+
+        <!-- Mensaje -->
+        <div class="mb-3">
+          <label class="form-label">Mensaje del recordatorio</label>
+          <textarea 
+            class="form-control" 
+            rows="4" 
+            [(ngModel)]="config.mensaje"
+            placeholder="Ej: ¡Te esperamos en nuestra boda! No olvides confirmar tu asistencia."></textarea>
+          <small class="text-muted">
+            El mensaje incluirá automáticamente el nombre del invitado y su link personalizado.
+          </small>
+        </div>
+
+        <!-- Botones -->
+        <div class="d-flex gap-2">
+          <button class="btn btn-primary" (click)="guardarConfig()">💾 Guardar Configuración</button>
+          <button class="btn btn-info" (click)="enviarPrueba()">📤 Enviar Prueba</button>
+          <button class="btn btn-warning" (click)="enviarATodos()">📢 Enviar a Todos Ahora</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Activar/Desactivar -->
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h5>Estado de Recordatorios</h5>
+            <p class="mb-0">
+              @if (config.activo) {
+                <span class="badge bg-success">✅ Activo</span>
+              } @else {
+                <span class="badge bg-secondary">⏸️ Desactivado</span>
+              }
+            </p>
+          </div>
+          <button 
+            class="btn btn-lg"
+            [class.btn-success]="!config.activo"
+            [class.btn-warning]="config.activo"
+            (click)="toggleActivo()">
+            {{ config.activo ? 'Desactivar' : 'Activar' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

@@ -18,7 +18,7 @@ export const authGuard: CanActivateFn = () => {
   return authService.user$.pipe(
     timeout(5000),
     take(1),
-    map(user => {
+    map((user: any) => {
       if (user) {
         return true;
       }

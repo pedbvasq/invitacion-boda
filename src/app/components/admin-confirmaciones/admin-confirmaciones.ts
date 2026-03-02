@@ -46,7 +46,7 @@ export class AdminConfirmaciones implements OnInit, OnDestroy {
         this.cdr.detectChanges();
         console.log('Total:', this.totalAsistentes);
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error('Error al cargar confirmaciones:', error);
       }
     });

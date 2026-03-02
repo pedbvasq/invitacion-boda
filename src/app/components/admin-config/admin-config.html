@@ -1,0 +1,79 @@
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Configuración</h2>
+    <div class="d-flex gap-2">
+      <button class="btn btn-secondary" routerLink="/admin/guests">← Invitados</button>
+      <button class="btn btn-danger" (click)="logout()">Cerrar Sesión</button>
+    </div>
+  </div>
+
+  @if (loading) {
+    <div class="text-center py-5">
+      <div class="spinner-border"></div>
+    </div>
+  } @else {
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5>Link de Google Photos para Fotos de Invitados</h5>
+        
+        <div class="mb-3">
+          <label class="form-label">Link del Álbum Compartido</label>
+          <input 
+            type="url" 
+            class="form-control" 
+            [(ngModel)]="googlePhotosLink"
+            placeholder="https://photos.app.goo.gl/...">
+        </div>
+
+        <button class="btn btn-primary" (click)="guardarLink()">
+          💾 Guardar Link
+        </button>
+
+        <button class="btn btn-info ms-2" (click)="mostrarInstrucciones = !mostrarInstrucciones">
+          {{ mostrarInstrucciones ? '▼' : '▶' }} Cómo obtener el link
+        </button>
+      </div>
+    </div>
+
+    @if (mostrarInstrucciones) {
+      <div class="card">
+        <div class="card-body">
+          <h5>📋 Instrucciones para obtener el link de Google Photos</h5>
+          
+          <ol class="instrucciones">
+            <li>
+              <strong>Abre Google Photos</strong>
+              <p>Ve a <a href="https://photos.google.com" target="_blank">photos.google.com</a></p>
+            </li>
+            
+            <li>
+              <strong>Crea un nuevo álbum</strong>
+              <p>Haz clic en "Álbumes" → "Crear álbum" → Dale un nombre (ej: "Boda María y Juan")</p>
+            </li>
+            
+            <li>
+              <strong>Activa la colaboración</strong>
+              <p>Dentro del álbum, haz clic en el ícono de compartir (arriba a la derecha)</p>
+              <p>Activa la opción "Colaborar" o "Permitir que otros agreguen fotos"</p>
+            </li>
+            
+            <li>
+              <strong>Copia el link</strong>
+              <p>Haz clic en "Obtener enlace" o "Copiar enlace"</p>
+              <p>El link se verá así: <code>https://photos.app.goo.gl/xxxxx</code></p>
+            </li>
+            
+            <li>
+              <strong>Pega el link aquí</strong>
+              <p>Copia ese link y pégalo en el campo de arriba, luego haz clic en "Guardar Link"</p>
+            </li>
+          </ol>
+
+          <div class="alert alert-info mt-3">
+            <strong>💡 Importante:</strong> Asegúrate de activar la opción de colaboración para que los invitados puedan subir sus fotos.
+          </div>
+        </div>
+      </div>
+    }
+  }
+</div>
