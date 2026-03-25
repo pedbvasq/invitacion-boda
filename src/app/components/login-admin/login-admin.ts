@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -15,6 +15,7 @@ export class LoginAdmin {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   private router = inject(Router);
+  private cdr = inject(ChangeDetectorRef);
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -44,8 +45,11 @@ export class LoginAdmin {
       this.router.navigate(['/admin']);
     } catch (error: any) {
       this.errorMessage = this.getErrorMessage(error.code);
+      this.loading = false;
+      this.cdr.detectChanges();
     } finally {
       this.loading = false;
+      this.cdr.detectChanges();
     }
   }
 

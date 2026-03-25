@@ -99,6 +99,17 @@
     margin: 10px 0 20px;
 }
 
+.hora-evento {
+    display: inline-block;
+    margin: -6px 0 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #c08c9f;
+}
+
 .card button {
     font-family: 'Montserrat', sans-serif;
     background: #c58b8b;
