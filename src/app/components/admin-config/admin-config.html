@@ -1,79 +1,105 @@
-<div class="container py-4">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2>Configuración</h2>
-    <div class="d-flex gap-2">
-      <button class="btn btn-secondary" routerLink="/admin/guests">← Invitados</button>
-      <button class="btn btn-danger" (click)="logout()">Cerrar Sesión</button>
-    </div>
-  </div>
+<div class="config-shell">
+  <div class="config-backdrop"></div>
 
-  @if (loading) {
-    <div class="text-center py-5">
-      <div class="spinner-border"></div>
-    </div>
-  } @else {
-    <div class="card mb-4">
-      <div class="card-body">
-        <h5>Link de Google Photos para Fotos de Invitados</h5>
-        
-        <div class="mb-3">
-          <label class="form-label">Link del Álbum Compartido</label>
-          <input 
-            type="url" 
-            class="form-control" 
-            [(ngModel)]="googlePhotosLink"
-            placeholder="https://photos.app.goo.gl/...">
-        </div>
-
-        <button class="btn btn-primary" (click)="guardarLink()">
-          💾 Guardar Link
-        </button>
-
-        <button class="btn btn-info ms-2" (click)="mostrarInstrucciones = !mostrarInstrucciones">
-          {{ mostrarInstrucciones ? '▼' : '▶' }} Cómo obtener el link
-        </button>
+  <div class="container config-content py-4 py-lg-5">
+    <section class="config-hero mb-4">
+      <div>
+        <span class="config-kicker">Configuracion</span>
+        <h1>Galeria colaborativa</h1>
+        <p>
+          Centraliza el enlace del album compartido para que los invitados puedan subir
+          sus fotos sin friccion y con una experiencia mas cuidada.
+        </p>
       </div>
-    </div>
 
-    @if (mostrarInstrucciones) {
-      <div class="card">
-        <div class="card-body">
-          <h5>📋 Instrucciones para obtener el link de Google Photos</h5>
-          
+      <div class="config-hero-actions">
+        <button class="btn btn-outline-light hero-btn" routerLink="/admin/guests">Volver a invitados</button>
+        <button class="btn btn-light hero-btn hero-btn-secondary" (click)="logout()">Cerrar sesion</button>
+      </div>
+    </section>
+
+    @if (loading) {
+      <section class="config-panel loading-panel">
+        <div class="text-center py-5">
+          <div class="spinner-border"></div>
+        </div>
+      </section>
+    } @else {
+      <div class="config-grid">
+        <section class="config-panel">
+          <span class="config-kicker">Integracion</span>
+          <h2>Link de Google Photos</h2>
+          <p class="panel-copy">
+            Usa un album compartido para recopilar recuerdos del evento y manten el acceso
+            siempre actualizado desde este panel.
+          </p>
+
+          <div class="mb-3">
+            <label class="form-label custom-label">Link del album compartido</label>
+            <input
+              type="url"
+              class="form-control custom-input"
+              [(ngModel)]="googlePhotosLink"
+              placeholder="https://photos.app.goo.gl/...">
+          </div>
+
+          <div class="button-row">
+            <button class="btn primary-btn" (click)="guardarLink()">Guardar link</button>
+            <button class="btn secondary-btn" (click)="mostrarInstrucciones = !mostrarInstrucciones">
+              {{ mostrarInstrucciones ? 'Ocultar instrucciones' : 'Como obtener el link' }}
+            </button>
+          </div>
+        </section>
+
+        <section class="config-panel info-panel">
+          <span class="config-kicker">Sugerencia</span>
+          <h2>Buenas practicas</h2>
+          <ul class="tips-list">
+            <li>Usa un album dedicado al evento para mantener ordenadas todas las fotos.</li>
+            <li>Activa colaboracion antes de compartir el enlace con los invitados.</li>
+            <li>Verifica que el link abra correctamente en modo publico o compartido.</li>
+          </ul>
+        </section>
+      </div>
+
+      @if (mostrarInstrucciones) {
+        <section class="config-panel instructions-panel mt-4">
+          <span class="config-kicker">Paso a paso</span>
+          <h2>Como obtener el link de Google Photos</h2>
+
           <ol class="instrucciones">
             <li>
               <strong>Abre Google Photos</strong>
               <p>Ve a <a href="https://photos.google.com" target="_blank">photos.google.com</a></p>
             </li>
-            
+
             <li>
-              <strong>Crea un nuevo álbum</strong>
-              <p>Haz clic en "Álbumes" → "Crear álbum" → Dale un nombre (ej: "Boda María y Juan")</p>
+              <strong>Crea un nuevo album</strong>
+              <p>Haz clic en "Albumes", luego en "Crear album" y ponle un nombre claro.</p>
             </li>
-            
+
             <li>
-              <strong>Activa la colaboración</strong>
-              <p>Dentro del álbum, haz clic en el ícono de compartir (arriba a la derecha)</p>
-              <p>Activa la opción "Colaborar" o "Permitir que otros agreguen fotos"</p>
+              <strong>Activa la colaboracion</strong>
+              <p>Dentro del album, usa el boton de compartir y habilita la opcion para que otros agreguen fotos.</p>
             </li>
-            
+
             <li>
               <strong>Copia el link</strong>
-              <p>Haz clic en "Obtener enlace" o "Copiar enlace"</p>
-              <p>El link se verá así: <code>https://photos.app.goo.gl/xxxxx</code></p>
+              <p>Selecciona "Obtener enlace" o "Copiar enlace".</p>
+              <p>El formato normalmente se vera asi: <code>https://photos.app.goo.gl/xxxxx</code></p>
             </li>
-            
+
             <li>
-              <strong>Pega el link aquí</strong>
-              <p>Copia ese link y pégalo en el campo de arriba, luego haz clic en "Guardar Link"</p>
+              <strong>Pegalo en este panel</strong>
+              <p>Guarda el enlace para que quede disponible en la invitacion.</p>
             </li>
           </ol>
 
-          <div class="alert alert-info mt-3">
-            <strong>💡 Importante:</strong> Asegúrate de activar la opción de colaboración para que los invitados puedan subir sus fotos.
+          <div class="note-banner">
+            <strong>Importante:</strong> confirma que la colaboracion este activa para que los invitados puedan subir sus fotos sin problemas.
           </div>
-        </div>
-      </div>
+        </section>
+      }
     }
-  }
+  </div>
 </div>

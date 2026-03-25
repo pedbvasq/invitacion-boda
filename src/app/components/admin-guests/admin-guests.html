@@ -1,131 +1,165 @@
-<div class="container py-4">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2>Gestión de Invitados</h2>
-    <div class="d-flex gap-2">
-      <button class="btn btn-secondary" routerLink="/admin/config">⚙️ Configuración</button>
-      <!-- <button class="btn btn-info" routerLink="/admin/reminders">📱 Recordatorios</button> -->
-      <button class="btn btn-danger" (click)="logout()">Cerrar Sesión</button>
-    </div>
-  </div>
+<div class="dashboard-shell">
+  <div class="dashboard-backdrop"></div>
 
-  <!-- Estadísticas -->
-  <div class="row mb-4">
-    <div class="col-md-4">
-      <div class="card text-center">
-        <div class="card-body">
-          <h5>Total Invitados</h5>
-          <h2>{{totalInvitados}}</h2>
+  <div class="container dashboard-content py-4 py-lg-5">
+    <section class="hero-panel mb-4">
+      <div class="hero-copy">
+        <span class="eyebrow">Panel administrativo</span>
+        <h1>Gestion de invitados</h1>
+        <p>
+          Organiza confirmaciones, comparte enlaces personalizados y administra la lista
+          completa desde una vista mas clara y elegante.
+        </p>
+      </div>
+
+      <div class="hero-actions">
+        <button class="btn btn-outline-light nav-btn" routerLink="/admin/config">Configuracion</button>
+        <button class="btn btn-light logout-btn" (click)="logout()">Cerrar sesion</button>
+      </div>
+    </section>
+
+    <section class="stats-grid mb-4">
+      <article class="stat-card stat-card-primary">
+        <span class="stat-label">Total invitados</span>
+        <strong class="stat-value">{{totalInvitados}}</strong>
+        <small class="stat-footnote">Base completa de registros</small>
+      </article>
+
+      <article class="stat-card stat-card-success">
+        <span class="stat-label">Confirmados</span>
+        <strong class="stat-value">{{confirmados}}</strong>
+        <small class="stat-footnote">Respuestas recibidas</small>
+      </article>
+
+      <article class="stat-card stat-card-accent">
+        <span class="stat-label">Total personas</span>
+        <strong class="stat-value">{{totalPersonas}}</strong>
+        <small class="stat-footnote">Asistencia confirmada acumulada</small>
+      </article>
+    </section>
+
+    <section class="surface-panel mb-4">
+      <div class="panel-header">
+        <div>
+          <span class="section-kicker">Herramientas</span>
+          <h2>Acciones rapidas</h2>
+        </div>
+
+        <div class="panel-filter">
+          <label for="estadoFiltro" class="filter-label">Filtrar lista</label>
+          <select id="estadoFiltro" class="form-select filter-select" [(ngModel)]="filtroEstado">
+            <option value="todos">Todos los invitados</option>
+            <option value="confirmados">Solo confirmados</option>
+            <option value="pendientes">Solo pendientes</option>
+          </select>
         </div>
       </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card text-center">
-        <div class="card-body">
-          <h5>Confirmados</h5>
-          <h2>{{confirmados}}</h2>
-        </div>
+
+      <div class="action-grid">
+        <button class="btn action-btn action-btn-primary" (click)="showAddForm = !showAddForm">
+          {{ showAddForm ? 'Cancelar formulario' : 'Agregar invitado' }}
+        </button>
+        <button class="btn action-btn action-btn-success" (click)="downloadTemplate()">Descargar plantilla</button>
+        <label class="btn action-btn action-btn-info upload-btn">
+          Subir Excel
+          <input type="file" accept=".xlsx,.xls" (change)="uploadExcel($event)" hidden>
+        </label>
+        <button class="btn action-btn action-btn-muted" (click)="exportGuests()">Exportar lista</button>
+        <button class="btn action-btn action-btn-danger" (click)="deleteAllGuests()">Eliminar todos</button>
       </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card text-center">
-        <div class="card-body">
-          <h5>Total Personas</h5>
-          <h2>{{totalPersonas}}</h2>
+    </section>
+
+    @if (showAddForm) {
+      <section class="surface-panel form-panel mb-4">
+        <div class="panel-header">
+          <div>
+            <span class="section-kicker">Edicion</span>
+            <h2>{{ editingGuest ? 'Editar invitado' : 'Nuevo invitado' }}</h2>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Acciones -->
-  <div class="mb-3 d-flex gap-2 flex-wrap">
-    <button class="btn btn-primary" (click)="showAddForm = !showAddForm">
-      {{ showAddForm ? 'Cancelar' : '+ Agregar Invitado' }}
-    </button>
-    <button class="btn btn-success" (click)="downloadTemplate()">📥 Descargar Plantilla</button>
-    <label class="btn btn-info">
-      📤 Subir Excel
-      <input type="file" accept=".xlsx,.xls" (change)="uploadExcel($event)" hidden>
-    </label>
-    <button class="btn btn-secondary" (click)="exportGuests()">📊 Exportar Lista</button>
-    <button class="btn btn-danger" (click)="deleteAllGuests()">🗑️ Eliminar Todos</button>
-  </div>
-
-  <!-- Filtro -->
-  <div class="mb-3">
-    <select class="form-select" [(ngModel)]="filtroEstado">
-      <option value="todos">Todos los invitados</option>
-      <option value="confirmados">Solo confirmados</option>
-      <option value="pendientes">Solo pendientes</option>
-    </select>
-  </div>
-
-  <!-- Formulario Agregar/Editar -->
-  @if (showAddForm) {
-    <div class="card mb-3">
-      <div class="card-body">
-        <h5>{{ editingGuest ? 'Editar' : 'Agregar' }} Invitado</h5>
-        <div class="row">
-          <div class="col-md-4">
-            <input type="text" class="form-control" placeholder="Nombres" [(ngModel)]="nombres">
+        <div class="row g-3 align-items-end">
+          <div class="col-lg-4">
+            <label class="field-label">Nombres</label>
+            <input type="text" class="form-control custom-input" placeholder="Nombres" [(ngModel)]="nombres">
           </div>
-          <div class="col-md-4">
-            <input type="text" class="form-control" placeholder="Apellidos" [(ngModel)]="apellidos">
+          <div class="col-lg-4">
+            <label class="field-label">Apellidos</label>
+            <input type="text" class="form-control custom-input" placeholder="Apellidos" [(ngModel)]="apellidos">
           </div>
-          <div class="col-md-2">
-            <input type="number" class="form-control" placeholder="Cupo" [(ngModel)]="cupoPermitido" min="1">
+          <div class="col-lg-2">
+            <label class="field-label">Cupo</label>
+            <input type="number" class="form-control custom-input" placeholder="Cupo" [(ngModel)]="cupoPermitido" min="1">
           </div>
-          <div class="col-md-2">
+          <div class="col-lg-2">
             @if (editingGuest) {
-              <button class="btn btn-success w-100" (click)="saveEdit()">Guardar</button>
+              <button class="btn submit-btn submit-btn-success w-100" (click)="saveEdit()">Guardar</button>
             } @else {
-              <button class="btn btn-primary w-100" (click)="addGuest()">Agregar</button>
+              <button class="btn submit-btn submit-btn-primary w-100" (click)="addGuest()">Agregar</button>
             }
           </div>
         </div>
-      </div>
-    </div>
-  }
+      </section>
+    }
 
-  <!-- Tabla de Invitados -->
-  <div class="table-responsive">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Nombres</th>
-          <th>Apellidos</th>
-          <th>Cupo</th>
-          <th>Estado</th>
-          <th>Confirmadas</th>
-          <th>Link</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (guest of guestsFiltrados; track guest.id) {
-          <tr>
-            <td>{{guest.nombres}}</td>
-            <td>{{guest.apellidos}}</td>
-            <td>{{guest.cupoPermitido}}</td>
-            <td>
-              @if (guest.confirmado) {
-                <span class="badge bg-success">Confirmado</span>
-              } @else {
-                <span class="badge bg-warning">Pendiente</span>
+    <section class="surface-panel">
+      <div class="panel-header">
+        <div>
+          <span class="section-kicker">Listado</span>
+          <h2>Invitados registrados</h2>
+        </div>
+        <div class="results-pill">{{ guestsFiltrados.length }} visibles</div>
+      </div>
+
+      <div class="table-shell">
+        <div class="table-responsive">
+          <table class="table guest-table align-middle mb-0">
+            <thead>
+              <tr>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Cupo</th>
+                <th>Estado</th>
+                <th>Confirmadas</th>
+                <th>Link</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (guest of guestsFiltrados; track guest.id) {
+                <tr>
+                  <td>
+                    <div class="guest-name">{{guest.nombres}}</div>
+                  </td>
+                  <td>{{guest.apellidos}}</td>
+                  <td>
+                    <span class="table-chip">{{guest.cupoPermitido}} personas</span>
+                  </td>
+                  <td>
+                    @if (guest.confirmado) {
+                      <span class="status-badge status-badge-success">Confirmado</span>
+                    } @else {
+                      <span class="status-badge status-badge-pending">Pendiente</span>
+                    }
+                  </td>
+                  <td>{{guest.personasConfirmadas}}</td>
+                  <td>
+                    <button class="btn table-action-link" (click)="copyLink(guest.id!)">
+                      Copiar link
+                    </button>
+                  </td>
+                  <td>
+                    <div class="table-actions">
+                      <button class="btn table-icon-btn table-icon-edit" (click)="editGuest(guest)">Editar</button>
+                      <button class="btn table-icon-btn table-icon-delete" (click)="deleteGuest(guest.id!)">Eliminar</button>
+                    </div>
+                  </td>
+                </tr>
               }
-            </td>
-            <td>{{guest.personasConfirmadas}}</td>
-            <td>
-              <button class="btn btn-sm btn-outline-primary" (click)="copyLink(guest.id!)">
-                📋 Copiar
-              </button>
-            </td>
-            <td>
-              <button class="btn btn-sm btn-warning me-1" (click)="editGuest(guest)">✏️</button>
-              <button class="btn btn-sm btn-danger" (click)="deleteGuest(guest.id!)">🗑️</button>
-            </td>
-          </tr>
-        }
-      </tbody>
-    </table>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
   </div>
 </div>

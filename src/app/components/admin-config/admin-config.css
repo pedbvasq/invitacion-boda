@@ -1,34 +1,277 @@
-.instrucciones {
+.config-shell {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top left, rgba(215, 180, 120, 0.22), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(92, 60, 36, 0.12), transparent 32%),
+    linear-gradient(180deg, #f8f2ea 0%, #fffdf9 48%, #f5ede4 100%);
+}
+
+.config-backdrop {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(93, 61, 37, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(93, 61, 37, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.config-content {
+  position: relative;
+  z-index: 1;
+}
+
+.config-hero,
+.config-panel {
+  border: 1px solid rgba(124, 92, 63, 0.12);
+  box-shadow: 0 24px 70px rgba(84, 53, 31, 0.08);
+}
+
+.config-hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2rem;
+  border-radius: 28px;
+  background: linear-gradient(135deg, rgba(92, 60, 36, 0.96), rgba(143, 102, 66, 0.92));
+  color: #fff7f0;
+}
+
+.config-kicker,
+.custom-label {
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+}
+
+.config-kicker {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.config-hero h1,
+.config-panel h2 {
+  margin: 0;
+}
+
+.config-hero h1 {
+  font-size: clamp(2rem, 3vw, 3rem);
+}
+
+.config-hero p,
+.panel-copy {
+  margin-top: 1rem;
+  line-height: 1.75;
+}
+
+.config-hero p {
+  max-width: 700px;
+  color: rgba(255, 247, 240, 0.88);
+}
+
+.config-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.hero-btn {
+  min-width: 170px;
+  padding: 0.9rem 1.2rem;
+  border-radius: 999px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-btn:hover,
+.primary-btn:hover,
+.secondary-btn:hover {
+  transform: translateY(-2px);
+}
+
+.hero-btn {
+  border-color: rgba(255, 255, 255, 0.32);
+  color: #fff7f0;
+}
+
+.hero-btn-secondary {
+  color: #5a3d29;
+}
+
+.config-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.9fr);
+  gap: 1rem;
+}
+
+.config-panel {
+  padding: 1.75rem;
+  border-radius: 28px;
+  background: rgba(255, 252, 248, 0.92);
+  backdrop-filter: blur(14px);
+}
+
+.loading-panel {
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.config-panel h2 {
+  font-size: 1.85rem;
+  color: #3e291c;
+}
+
+.panel-copy {
+  color: #685343;
+}
+
+.custom-label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #8a6f59;
+}
+
+.custom-input {
+  min-height: 56px;
+  border: 1px solid rgba(124, 92, 63, 0.16);
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: none;
+}
+
+.custom-input:focus {
+  border-color: rgba(124, 92, 63, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(169, 130, 87, 0.15);
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.primary-btn,
+.secondary-btn {
+  min-height: 52px;
+  padding: 0.9rem 1.2rem;
+  border: none;
+  border-radius: 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, #7d5638, #a9784e);
+  color: #fffdf9;
+}
+
+.secondary-btn {
+  background: linear-gradient(135deg, #e9dfd4, #e3d2bf);
+  color: #5c4332;
+}
+
+.info-panel {
+  background: linear-gradient(180deg, rgba(255, 249, 242, 0.96), rgba(247, 238, 229, 0.96));
+}
+
+.tips-list {
+  margin: 1rem 0 0;
+  padding-left: 1.2rem;
+  color: #5d493a;
   line-height: 1.8;
-  padding-left: 20px;
+}
+
+.instructions-panel {
+  background: linear-gradient(180deg, rgba(255, 252, 248, 0.98), rgba(249, 241, 232, 0.95));
+}
+
+.instrucciones {
+  margin: 1.25rem 0 0;
+  line-height: 1.8;
+  padding-left: 1.25rem;
 }
 
 .instrucciones li {
-  margin-bottom: 20px;
+  margin-bottom: 1.2rem;
 }
 
 .instrucciones strong {
-  color: #667eea;
-  font-size: 1.1rem;
+  color: #7d5638;
+  font-size: 1.05rem;
 }
 
 .instrucciones p {
-  margin: 5px 0;
-  color: #666;
+  margin: 0.35rem 0 0;
+  color: #685343;
 }
 
 .instrucciones code {
-  background: #f4f4f4;
-  padding: 2px 8px;
-  border-radius: 4px;
+  background: rgba(124, 92, 63, 0.08);
+  padding: 0.2rem 0.5rem;
+  border-radius: 8px;
   font-size: 0.9rem;
 }
 
 .instrucciones a {
-  color: #667eea;
+  color: #7d5638;
   text-decoration: none;
 }
 
 .instrucciones a:hover {
   text-decoration: underline;
+}
+
+.note-banner {
+  margin-top: 1.25rem;
+  padding: 1rem 1.2rem;
+  border-radius: 16px;
+  background: rgba(125, 86, 56, 0.1);
+  color: #5f4433;
+}
+
+@media (max-width: 991.98px) {
+  .config-hero,
+  .config-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .config-hero {
+    flex-direction: column;
+  }
+
+  .config-hero-actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .config-content {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .config-hero,
+  .config-panel {
+    border-radius: 22px;
+  }
+
+  .hero-btn,
+  .primary-btn,
+  .secondary-btn {
+    width: 100%;
+  }
 }
