@@ -25,6 +25,8 @@ export class Confirmacion implements OnInit {
   error = false;
   personasConfirmadas = 1;
   confirmado = false;
+  asistenciaSeleccionada: 'si' | 'no' = 'si';
+  guestAsistira = true;
   guestId: string | null = null;
 
   ngOnInit() {
@@ -47,6 +49,8 @@ export class Confirmacion implements OnInit {
       this.error = true;
     } else if (this.guest.confirmado) {
       this.confirmado = true;
+      this.guestAsistira = this.guest.asistira !== false;
+      this.asistenciaSeleccionada = this.guestAsistira ? 'si' : 'no';
       this.personasConfirmadas = this.guest.personasConfirmadas;
     }
 
@@ -54,18 +58,37 @@ export class Confirmacion implements OnInit {
   }
 
   async confirmar() {
-    if (!this.guest || this.personasConfirmadas < 1 || this.personasConfirmadas > this.guest.cupoPermitido) {
+    if (!this.guest) {
+      return;
+    }
+
+    if (this.asistenciaSeleccionada === 'no') {
+      await this.guestService.confirmGuest(this.guest.id!, 0, false);
+      this.personasConfirmadas = 0;
+      this.guestAsistira = false;
+      this.confirmado = true;
+      this.cdr.detectChanges();
+      return;
+    }
+
+    const maxAsistentes = this.guest.cupoPermitido > 0 ? this.guest.cupoPermitido : 1;
+    const personasAConfirmar = this.guest.cupoPermitido > 0 ? this.personasConfirmadas : 1;
+
+    if (personasAConfirmar < 1 || personasAConfirmar > maxAsistentes) {
       alert(this.lang.isEnglish() ? 'Invalid number of guests' : 'Numero de personas invalido');
       return;
     }
 
-    await this.guestService.confirmGuest(this.guest.id!, this.personasConfirmadas);
+    await this.guestService.confirmGuest(this.guest.id!, personasAConfirmar, true);
+    this.personasConfirmadas = personasAConfirmar;
+    this.guestAsistira = true;
     this.confirmado = true;
     this.cdr.detectChanges();
   }
 
   get personasOptions() {
     if (!this.guest) return [1];
-    return Array.from({ length: this.guest.cupoPermitido }, (_, i) => i + 1);
+    const cupo = this.guest.cupoPermitido > 0 ? this.guest.cupoPermitido : 1;
+    return Array.from({ length: cupo }, (_, i) => i + 1);
   }
 }

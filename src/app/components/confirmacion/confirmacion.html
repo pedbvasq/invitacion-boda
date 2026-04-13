@@ -22,31 +22,67 @@
     <div class="guest-info">
       <h3>{{guest.nombres}} {{guest.apellidos}}</h3>
       <p class="frase">
-        {{ lang.isEnglish()
-          ? 'You can bring up to ' + guest.cupoPermitido + ' guest(s)'
-          : 'Puedes traer hasta ' + guest.cupoPermitido + ' persona(s)' }}
+        @if (guest.cupoPermitido > 0) {
+          {{ lang.isEnglish()
+            ? 'You can confirm up to ' + guest.cupoPermitido + ' guest(s)'
+            : 'Puedes confirmar hasta ' + guest.cupoPermitido + ' persona(s)' }}
+        } @else {
+          {{ lang.isEnglish()
+            ? 'Please choose if you will attend.'
+            : 'Elige si asistiras al evento.' }}
+        }
       </p>
     </div>
 
     @if (!confirmado) {
       <div class="form-group">
-        <label class="radio-title">{{ lang.isEnglish() ? 'How many people will attend?' : 'Cuantas personas asistiran?' }}</label>
-        <select class="form-control" [(ngModel)]="personasConfirmadas">
-          @for (num of personasOptions; track num) {
-            <option [value]="num">{{num}}</option>
-          }
-        </select>
+        <label class="radio-title">{{ lang.isEnglish() ? 'Will you attend?' : 'Asistiras?' }}</label>
+        <div class="radio-group">
+          <label>
+            <input type="radio" name="asistencia" value="si" [(ngModel)]="asistenciaSeleccionada">
+            {{ lang.isEnglish() ? 'Yes, I will attend' : 'Si, asistire' }}
+          </label>
+          <label>
+            <input type="radio" name="asistencia" value="no" [(ngModel)]="asistenciaSeleccionada">
+            {{ lang.isEnglish() ? 'No, I will not attend' : 'No, no asistire' }}
+          </label>
+        </div>
       </div>
 
+      @if (asistenciaSeleccionada === 'si' && guest.cupoPermitido > 0) {
+        <div class="form-group">
+          <label class="radio-title">{{ lang.isEnglish() ? 'How many people will attend?' : 'Cuantas personas asistiran?' }}</label>
+          <select class="form-control" [(ngModel)]="personasConfirmadas">
+            @for (num of personasOptions; track num) {
+              <option [value]="num">{{num}}</option>
+            }
+          </select>
+        </div>
+      }
+
+      @if (asistenciaSeleccionada === 'si' && guest.cupoPermitido === 0) {
+        <p class="frase">
+          {{ lang.isEnglish()
+            ? 'Your attendance will be registered with this response.'
+            : 'Tu asistencia quedara registrada con esta respuesta.' }}
+        </p>
+      }
+
       <button class="btn-enviar" (click)="confirmar()">
-        {{ lang.isEnglish() ? 'Confirm attendance' : 'Confirmar Asistencia' }}
+        {{ lang.isEnglish() ? 'Send response' : 'Enviar respuesta' }}
       </button>
     } @else {
       <p class="mensaje-ok">
-        {{ lang.isEnglish() ? 'Thank you for confirming.' : 'Gracias por confirmar.' }}<br>
-        {{ lang.isEnglish()
-          ? 'You confirmed the attendance of ' + personasConfirmadas + ' guest(s)'
-          : 'Has confirmado la asistencia de ' + personasConfirmadas + ' persona(s)' }}
+        @if (guestAsistira) {
+          {{ lang.isEnglish() ? 'Thank you for confirming your attendance.' : 'Gracias por confirmar tu asistencia.' }}<br>
+          {{ lang.isEnglish()
+            ? 'Attendance confirmed for ' + personasConfirmadas + ' guest(s)'
+            : 'Asistencia confirmada para ' + personasConfirmadas + ' persona(s)' }}
+        } @else {
+          {{ lang.isEnglish()
+            ? 'Thank you for your response. We are sorry you cannot join us.'
+            : 'Gracias por responder. Lamentamos que no puedas acompanarnos.' }}
+        }
       </p>
     }
   }

@@ -22,6 +22,7 @@ export class GuestService {
       cupoPermitido,
       token: this.generateToken(),
       confirmado: false,
+      asistira: true,
       personasConfirmadas: 0,
       createdAt: new Date()
     };
@@ -84,10 +85,11 @@ export class GuestService {
     return { id: doc.id, ...doc.data() } as Guest;
   }
 
-  async confirmGuest(id: string, personasConfirmadas: number): Promise<void> {
+  async confirmGuest(id: string, personasConfirmadas: number, asistira: boolean = true): Promise<void> {
     const guestDoc = doc(this.firestore, 'guests', id);
     await updateDoc(guestDoc, {
       confirmado: true,
+      asistira,
       personasConfirmadas,
       fechaConfirmacion: new Date()
     });

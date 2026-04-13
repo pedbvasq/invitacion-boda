@@ -5,6 +5,7 @@ export interface Guest {
   cupoPermitido: number;
   token: string;
   confirmado: boolean;
+  asistira?: boolean;
   personasConfirmadas: number;
   telefono?: string;
   fechaConfirmacion?: Date;

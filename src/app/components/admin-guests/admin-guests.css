@@ -343,6 +343,11 @@
   color: #94631f;
 }
 
+.status-badge-decline {
+  background: rgba(185, 102, 95, 0.16);
+  color: #9f544d;
+}
+
 .table-actions {
   display: flex;
   flex-wrap: wrap;

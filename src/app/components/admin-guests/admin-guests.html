@@ -137,7 +137,11 @@
                   </td>
                   <td>
                     @if (guest.confirmado) {
-                      <span class="status-badge status-badge-success">Confirmado</span>
+                      @if (guest.asistira === false) {
+                        <span class="status-badge status-badge-decline">No asiste</span>
+                      } @else {
+                        <span class="status-badge status-badge-success">Confirmado</span>
+                      }
                     } @else {
                       <span class="status-badge status-badge-pending">Pendiente</span>
                     }
@@ -146,10 +150,10 @@
                   <td>
                     <div class="table-actions">
                       <button class="btn table-action-link" (click)="copyLink(guest.id!)">
-                        Copiar ES
+                        Copiar link
                       </button>
                       <button class="btn table-action-link" (click)="copyEnglishLink(guest.id!)">
-                        Copiar EN
+                        Copiar en ingles
                       </button>
                     </div>
                   </td>
