@@ -1,38 +1,40 @@
 <div class="ubicacion-container">
-    <img src="/flor-izquierda.png" class="flor flor-izquierda" />
-    <img src="/flor-derecha.png" class="flor flor-derecha" />
+  <img src="/flor-izquierda.png" class="flor flor-izquierda" />
+  <img src="/flor-derecha.png" class="flor flor-derecha" />
 
-    <p class="subtitulo">
-       A continuacion compartimos contigo los lugares destinados a celebrar nuestro gran dia.
-    </p>
+  <p class="subtitulo">
+    {{ lang.isEnglish()
+      ? 'Below we share the places where we will celebrate our special day.'
+      : 'A continuacion compartimos contigo los lugares destinados a celebrar nuestro gran dia.' }}
+  </p>
 
-    <div class="cards">
-        <div class="card">
-            <span class="icon">⛪</span>
-            <h4>CEREMONIA RELIGIOSA</h4>
-            <p>Iglesia Catolica "Parroquia Santo Tomas Apostol"</p>
-            <span class="hora-evento">3:00 PM - Misa</span>
-            <a
-              href="https://www.google.com/maps/search/Iglesia%20Cat%C3%B3lica%20Parroquia%20Santo%20Tom%C3%A1s%20Ap%C3%B3stol/@-2.04561493,-79.86987625,17z?hl=en"
-              target="_blank"
-              class="location-btn"
-            >
-              Ver ubicacion
-            </a>
-        </div>
-
-        <div class="card">
-            <span class="icon">🥂</span>
-            <h4>RECEPCION</h4>
-            <p>Etapa Murano | La Joya</p>
-            <span class="hora-evento">5:00 PM - Recepcion</span>
-            <a
-              href="https://www.google.com/maps?q=-2.0344991,-79.9140511&z=17&hl=en"
-              target="_blank"
-              class="location-btn"
-            >
-              Ver ubicacion
-            </a>
-        </div>
+  <div class="cards">
+    <div class="card">
+      <span class="icon">⛪</span>
+      <h4>{{ lang.isEnglish() ? 'RELIGIOUS CEREMONY' : 'CEREMONIA RELIGIOSA' }}</h4>
+      <p>{{ lang.isEnglish() ? 'Catholic Church "Parroquia Santo Tomas Apostol"' : 'Iglesia Catolica "Parroquia Santo Tomas Apostol"' }}</p>
+      <span class="hora-evento">{{ lang.isEnglish() ? '3:00 PM - Mass' : '3:00 PM - Misa' }}</span>
+      <a
+        href="https://www.google.com/maps/search/Iglesia%20Cat%C3%B3lica%20Parroquia%20Santo%20Tom%C3%A1s%20Ap%C3%B3stol/@-2.04561493,-79.86987625,17z?hl=en"
+        target="_blank"
+        class="location-btn"
+      >
+        {{ lang.isEnglish() ? 'View location' : 'Ver ubicacion' }}
+      </a>
     </div>
+
+    <div class="card">
+      <span class="icon">🥂</span>
+      <h4>{{ lang.isEnglish() ? 'RECEPTION' : 'RECEPCION' }}</h4>
+      <p>Etapa Murano | La Joya</p>
+      <span class="hora-evento">{{ lang.isEnglish() ? '5:00 PM - Reception' : '5:00 PM - Recepcion' }}</span>
+      <a
+        href="https://www.google.com/maps?q=-2.0344991,-79.9140511&z=17&hl=en"
+        target="_blank"
+        class="location-btn"
+      >
+        {{ lang.isEnglish() ? 'View location' : 'Ver ubicacion' }}
+      </a>
+    </div>
+  </div>
 </div>

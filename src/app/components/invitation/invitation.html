@@ -8,18 +8,17 @@
   </button>
 
   <div class="music-tooltip" *ngIf="!isPlaying">
-    Dale play a la música ❤️
+    {{ lang.isEnglish() ? 'Press play for music' : 'Dale play a la musica' }}
   </div>
 
   <div class="hero-card">
     <div class="hero-title">
       <div class="names-container">
-        <!-- Primer nombre: Inicial + letras adicionales -->
         <div class="name-wrapper">
           <span class="initial" [@initialFade]="initialM">{{ inicial1 }}</span>
           <span class="additional-letters" *ngIf="showExpanding">
-            <span 
-              *ngFor="let letra of letrasAdicionales1; let i = index" 
+            <span
+              *ngFor="let letra of letrasAdicionales1; let i = index"
               class="letter"
               [@letterExpand]="{ value: '', params: { delay: i * 50 } }">
               {{ letra }}
@@ -27,7 +26,6 @@
           </span>
         </div>
 
-        <!-- Separador: Y que se convierte en flor -->
         <div class="separator-wrapper">
           <span class="y-letter" [@flowerBloom]="flowerState" [@yToFlower]="yState" *ngIf="!showFlowerInName">y</span>
           <span class="flower-wrapper" *ngIf="showFlowerInName">
@@ -47,12 +45,11 @@
           </span>
         </div>
 
-        <!-- Segundo nombre: Inicial + letras adicionales -->
         <div class="name-wrapper">
           <span class="initial" [@initialFade]="initialJ">{{ inicial2 }}</span>
           <span class="additional-letters" *ngIf="showExpanding">
-            <span 
-              *ngFor="let letra of letrasAdicionales2; let i = index" 
+            <span
+              *ngFor="let letra of letrasAdicionales2; let i = index"
               class="letter"
               [@letterExpand]="{ value: '', params: { delay: i * 80 } }">
               {{ letra }}
@@ -63,10 +60,12 @@
     </div>
 
     <p class="romantic-phrase" [class.visible]="showRomanticPhrase">
-      Con el alma y corazón llenos de alegría y amor, nos unimos en matrimonio y te invitamos a compartir nuestra felicidad
+      {{ lang.isEnglish()
+        ? 'With our hearts full of joy and love, we are getting married and invite you to share our happiness.'
+        : 'Con el alma y corazon llenos de alegria y amor, nos unimos en matrimonio y te invitamos a compartir nuestra felicidad' }}
     </p>
     <p class="romantic-phrase" [class.visible]="showRomanticPhrase">
-    Nos Casamos
+      {{ lang.isEnglish() ? 'We are getting married' : 'Nos Casamos' }}
     </p>
   </div>
 </section>

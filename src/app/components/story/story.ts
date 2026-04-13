@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit, PLATFORM_ID, inject, ChangeDetectorRef, ElementRef, ViewChild } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { InvitationLanguageService } from '../../services/invitation-language.service';
 
 @Component({
   selector: 'app-story',
@@ -11,6 +12,7 @@ export class Story implements OnInit, AfterViewInit {
   @ViewChild('storySection', { static: false }) storySection?: ElementRef;
   private platformId = inject(PLATFORM_ID);
   private cdr = inject(ChangeDetectorRef);
+  lang = inject(InvitationLanguageService);
   
   showIntro = false;
   showPhrase = false;

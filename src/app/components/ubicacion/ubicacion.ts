@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { InvitationLanguageService } from '../../services/invitation-language.service';
 
 @Component({
   selector: 'app-ubicacion',
@@ -7,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './ubicacion.css',
 })
 export class Ubicacion {
-
+  lang = inject(InvitationLanguageService);
 }

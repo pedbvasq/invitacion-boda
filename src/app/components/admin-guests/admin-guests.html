@@ -144,9 +144,14 @@
                   </td>
                   <td>{{guest.personasConfirmadas}}</td>
                   <td>
-                    <button class="btn table-action-link" (click)="copyLink(guest.id!)">
-                      Copiar link
-                    </button>
+                    <div class="table-actions">
+                      <button class="btn table-action-link" (click)="copyLink(guest.id!)">
+                        Copiar ES
+                      </button>
+                      <button class="btn table-action-link" (click)="copyEnglishLink(guest.id!)">
+                        Copiar EN
+                      </button>
+                    </div>
                   </td>
                   <td>
                     <div class="table-actions">

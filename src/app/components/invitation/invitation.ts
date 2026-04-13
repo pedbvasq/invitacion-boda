@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, OnInit, PLATFORM_ID, inject, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { trigger, state, style, transition, animate, query, stagger } from '@angular/animations';
+import { InvitationLanguageService } from '../../services/invitation-language.service';
 
 @Component({
   selector: 'app-invitation',
@@ -36,6 +37,7 @@ export class Invitation implements OnInit, AfterViewInit {
   @ViewChild('audioPlayer', { static: false }) audioPlayer?: ElementRef<HTMLAudioElement>;
   private platformId = inject(PLATFORM_ID);
   private cdr = inject(ChangeDetectorRef);
+  lang = inject(InvitationLanguageService);
 
   // Estados de animación
   initialM = 'hidden';

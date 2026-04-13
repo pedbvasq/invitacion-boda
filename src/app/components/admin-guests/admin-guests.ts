@@ -102,6 +102,12 @@ export class AdminGuests implements OnInit {
     alert('Link copiado al portapapeles');
   }
 
+  copyEnglishLink(id: string) {
+    const link = `${window.location.origin}/${id}?lang=en`;
+    navigator.clipboard.writeText(link);
+    alert('Link en ingles copiado al portapapeles');
+  }
+
   downloadTemplate() {
     const template = [
       { nombres: 'Juan', apellidos: 'Pérez', cupoPermitido: 2 },

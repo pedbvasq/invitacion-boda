@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, afterNextRender, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConfigService } from '../../services/config.service';
+import { InvitationLanguageService } from '../../services/invitation-language.service';
 
 @Component({
   selector: 'app-fotos',
@@ -12,7 +13,8 @@ import { ConfigService } from '../../services/config.service';
 export class Fotos implements OnInit {
   private configService = inject(ConfigService);
   private cdr = inject(ChangeDetectorRef);
-  
+  lang = inject(InvitationLanguageService);
+
   googlePhotosLink = '';
   loading = true;
 
@@ -33,10 +35,9 @@ export class Fotos implements OnInit {
 
   abrirGooglePhotos() {
     if (!this.googlePhotosLink) {
-      alert('El link de Google Photos no está configurado');
+      alert(this.lang.isEnglish() ? 'Google Photos link is not configured yet' : 'El link de Google Photos no esta configurado');
       return;
     }
     window.open(this.googlePhotosLink, '_blank');
   }
 }
-

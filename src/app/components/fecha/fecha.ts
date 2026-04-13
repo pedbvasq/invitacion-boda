@@ -1,4 +1,5 @@
 import { Component, NgZone, OnDestroy, OnInit, signal, ChangeDetectorRef, inject } from '@angular/core';
+import { InvitationLanguageService } from '../../services/invitation-language.service';
 
 @Component({
   selector: 'app-fecha',
@@ -10,6 +11,7 @@ import { Component, NgZone, OnDestroy, OnInit, signal, ChangeDetectorRef, inject
 export class Fecha implements OnInit, OnDestroy {
   private ngZone = inject(NgZone);
   private cdr = inject(ChangeDetectorRef);
+  lang = inject(InvitationLanguageService);
 
   targetDate = new Date('2026-08-15T13:30:00');
   timer: any;
