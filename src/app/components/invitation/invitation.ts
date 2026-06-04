@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, OnInit, PLATFORM_ID, inject, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { trigger, state, style, transition, animate, query, stagger } from '@angular/animations';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { InvitationLanguageService } from '../../services/invitation-language.service';
 
 @Component({
@@ -22,7 +22,7 @@ import { InvitationLanguageService } from '../../services/invitation-language.se
     trigger('letterExpand', [
       transition(':enter', [
         style({ opacity: 0, transform: 'translateX(-5px)' }),
-        animate('300ms {{delay}}ms cubic-bezier(0.22, 1, 0.36, 1)', 
+        animate('300ms {{delay}}ms cubic-bezier(0.22, 1, 0.36, 1)',
           style({ opacity: 1, transform: 'translateX(0)' }))
       ], { params: { delay: 0 } })
     ]),
@@ -39,7 +39,6 @@ export class Invitation implements OnInit, AfterViewInit {
   private cdr = inject(ChangeDetectorRef);
   lang = inject(InvitationLanguageService);
 
-  // Estados de animación
   initialM = 'hidden';
   initialJ = 'hidden';
   flowerState = 'hidden';
@@ -50,13 +49,11 @@ export class Invitation implements OnInit, AfterViewInit {
   showRomanticPhrase = false;
   isPlaying = false;
 
-  // Datos
   nombreCompleto1 = 'Hugo';
   nombreCompleto2 = 'María';
   inicial1 = 'H';
   inicial2 = 'M';
 
-  // Letras adicionales para expansión
   get letrasAdicionales1(): string[] {
     return this.nombreCompleto1.slice(1).split('');
   }
@@ -66,7 +63,6 @@ export class Invitation implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    // Resetear estados cada vez que se carga el componente
     this.initialM = 'hidden';
     this.initialJ = 'hidden';
     this.flowerState = 'hidden';
@@ -79,44 +75,38 @@ export class Invitation implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     if (!isPlatformBrowser(this.platformId)) return;
 
-    // Doble requestAnimationFrame para evitar NG0100
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        // Fase 1: Iniciales aparecen con stagger
         setTimeout(() => {
           this.initialM = 'visible';
           this.cdr.detectChanges();
         }, 100);
-        
+
         setTimeout(() => {
           this.initialJ = 'visible';
           this.cdr.detectChanges();
         }, 250);
 
-        // Fase 2: "Y" aparece
         setTimeout(() => {
           this.flowerState = 'visible';
           this.cdr.detectChanges();
         }, 1100);
 
-        // Fase 3: Expansión de nombres
         setTimeout(() => {
           this.showExpanding = true;
           this.cdr.detectChanges();
         }, 3500);
 
-        // Fase 4: Y se convierte en flor
         setTimeout(() => {
           this.yState = 'flower';
           this.cdr.detectChanges();
-          
+
           setTimeout(() => {
             this.showFlowerInName = true;
             this.cdr.detectChanges();
           }, 600);
         }, 4000);
 
-        // Fase 5: Frase romántica aparece
         setTimeout(() => {
           this.showRomanticPhrase = true;
           this.cdr.detectChanges();
@@ -133,7 +123,7 @@ export class Invitation implements OnInit, AfterViewInit {
     if (!this.audioPlayer?.nativeElement) return;
 
     const audio = this.audioPlayer.nativeElement;
-    
+
     if (this.isPlaying) {
       audio.pause();
       this.isPlaying = false;
