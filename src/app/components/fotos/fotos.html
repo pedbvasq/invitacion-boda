@@ -1,19 +1,19 @@
 <section id="fotos" class="fotos-section">
   @if (!loading && googlePhotosLink) {
     <div class="container text-center">
-      <h2 class="titulo">{{ lang.isEnglish() ? 'Share your photos' : 'Comparte tus Fotos' }}</h2>
+      <h2 class="titulo">{{ lang.isEnglish() ? 'Share your photos' : 'Comparte tus fotos' }}</h2>
       <p class="frase">
         @if (lang.isEnglish()) {
           We want to see the wedding from your perspective!<br>
           Upload your photos and videos from our big day.
         } @else {
-          Queremos ver la boda desde tu perspectiva!<br>
-          Sube tus fotos y videos del gran dia
+          ¡Queremos ver la boda desde tu perspectiva!<br>
+          Sube tus fotos y videos del gran día.
         }
       </p>
 
       <button class="btn-subir-fotos" (click)="abrirGooglePhotos()">
-        {{ lang.isEnglish() ? 'Upload My Photos' : 'Subir Mis Fotos' }}
+        {{ lang.isEnglish() ? 'Upload my photos' : 'Subir mis fotos' }}
       </button>
 
       <p class="instrucciones mt-3">
@@ -22,8 +22,8 @@
             When you click, Google Photos will open so you can upload your pictures.<br>
             Please include your name in the photo descriptions.
           } @else {
-            Al hacer clic, se abrira Google Photos donde podras subir tus fotos.<br>
-            Por favor, incluye tu nombre en la descripcion de las fotos.
+            Al hacer clic, se abrirá Google Photos donde podrás subir tus fotos.<br>
+            Por favor, incluye tu nombre en la descripción de las fotos.
           }
         </small>
       </p>

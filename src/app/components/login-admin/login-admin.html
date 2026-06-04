@@ -1,15 +1,15 @@
 <div class="login-container">
   <div class="login-card">
-    <h2 class="text-center mb-4">🔐 Acceso Administrativo</h2>
-    
+    <h2 class="text-center mb-4">🔐 Acceso administrativo</h2>
+
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
-        <input 
-          type="email" 
-          class="form-control" 
+        <input
+          type="email"
+          class="form-control"
           [class.is-invalid]="campoInvalido('email')"
-          id="email" 
+          id="email"
           formControlName="email"
           placeholder="admin@ejemplo.com">
         <div class="invalid-feedback" *ngIf="campoInvalido('email')">
@@ -20,11 +20,11 @@
 
       <div class="mb-3">
         <label for="password" class="form-label">Contraseña</label>
-        <input 
-          type="password" 
+        <input
+          type="password"
           class="form-control"
           [class.is-invalid]="campoInvalido('password')"
-          id="password" 
+          id="password"
           formControlName="password"
           placeholder="••••••••">
         <div class="invalid-feedback" *ngIf="campoInvalido('password')">
@@ -37,11 +37,11 @@
         {{ errorMessage }}
       </div>
 
-      <button 
-        type="submit" 
+      <button
+        type="submit"
         class="btn btn-primary w-100"
         [disabled]="loading">
-        <span *ngIf="!loading">Iniciar Sesión</span>
+        <span *ngIf="!loading">Iniciar sesión</span>
         <span *ngIf="loading">
           <span class="spinner-border spinner-border-sm me-2"></span>
           Cargando...

@@ -72,7 +72,7 @@ export class AdminReminders implements OnInit {
       alert('Escribe un mensaje primero');
       return;
     }
-    
+
     const link = `${window.location.origin}/test`;
     await this.reminderService.enviarRecordatorio('0997122244', 'Prueba', link, this.config.mensaje);
   }
@@ -90,9 +90,9 @@ export class AdminReminders implements OnInit {
     for (const guest of this.guests) {
       const link = `${window.location.origin}/${guest.id}`;
       await this.reminderService.enviarRecordatorio(
-        guest.telefono!, 
-        guest.nombres, 
-        link, 
+        guest.telefono!,
+        guest.nombres,
+        link,
         this.config.mensaje
       );
       await new Promise(resolve => setTimeout(resolve, 1000));

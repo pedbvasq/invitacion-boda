@@ -1,20 +1,19 @@
 <div class="admin-container">
   <nav class="navbar navbar-dark bg-dark mb-4">
     <div class="container-fluid">
-      <span class="navbar-brand mb-0 h1">💒 Panel Administrativo - Boda</span>
+      <span class="navbar-brand mb-0 h1">💍 Panel administrativo - Boda</span>
       <button class="btn btn-outline-light btn-sm" (click)="cerrarSesion()">
-        Cerrar Sesión
+        Cerrar sesión
       </button>
     </div>
   </nav>
 
   <div class="container">
-    <!-- Estadísticas -->
     <div class="row mb-4">
       <div class="col-md-4">
         <div class="card text-center stats-card">
           <div class="card-body">
-            <h5 class="card-title">Total Confirmaciones</h5>
+            <h5 class="card-title">Total de confirmaciones</h5>
             <p class="card-text display-4">{{ totalAsistentes }}</p>
           </div>
         </div>
@@ -30,16 +29,15 @@
       <div class="col-md-4">
         <div class="card text-center stats-card stats-no">
           <div class="card-body">
-            <h5 class="card-title">❌ No Asisten</h5>
+            <h5 class="card-title">❌ No asisten</h5>
             <p class="card-text display-4">{{ asistentesNo }}</p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Botón Exportar -->
     <div class="mb-3 text-end">
-      <button 
+      <button
         class="btn btn-success"
         (click)="exportarExcel()"
         [disabled]="totalAsistentes === 0">
@@ -47,10 +45,9 @@
       </button>
     </div>
 
-    <!-- Tabla de Confirmaciones -->
     <div class="card">
       <div class="card-header">
-        <h5 class="mb-0">📋 Lista de Confirmaciones</h5>
+        <h5 class="mb-0">📋 Lista de confirmaciones</h5>
       </div>
       <div class="card-body">
         <div *ngIf="totalAsistentes === 0" class="alert alert-info text-center">
@@ -75,7 +72,7 @@
                 <td>{{ confirmacion.nombres }}</td>
                 <td>{{ confirmacion.apellidos }}</td>
                 <td>
-                  <span 
+                  <span
                     class="badge"
                     [class.bg-success]="confirmacion.asistencia.toLowerCase() === 'sí' || confirmacion.asistencia.toLowerCase() === 'si'"
                     [class.bg-danger]="confirmacion.asistencia.toLowerCase() === 'no'">

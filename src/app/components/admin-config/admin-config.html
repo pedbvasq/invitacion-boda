@@ -4,17 +4,17 @@
   <div class="container config-content py-4 py-lg-5">
     <section class="config-hero mb-4">
       <div>
-        <span class="config-kicker">Configuracion</span>
-        <h1>Galeria colaborativa</h1>
+        <span class="config-kicker">Configuración</span>
+        <h1>Galería colaborativa</h1>
         <p>
-          Centraliza el enlace del album compartido para que los invitados puedan subir
-          sus fotos sin friccion y con una experiencia mas cuidada.
+          Centraliza el enlace del álbum compartido para que los invitados puedan subir
+          sus fotos sin fricción y con una experiencia más cuidada.
         </p>
       </div>
 
       <div class="config-hero-actions">
         <button class="btn btn-outline-light hero-btn" routerLink="/admin/guests">Volver a invitados</button>
-        <button class="btn btn-light hero-btn hero-btn-secondary" (click)="logout()">Cerrar sesion</button>
+        <button class="btn btn-light hero-btn hero-btn-secondary" (click)="logout()">Cerrar sesión</button>
       </div>
     </section>
 
@@ -27,15 +27,15 @@
     } @else {
       <div class="config-grid">
         <section class="config-panel">
-          <span class="config-kicker">Integracion</span>
+          <span class="config-kicker">Integración</span>
           <h2>Link de Google Photos</h2>
           <p class="panel-copy">
-            Usa un album compartido para recopilar recuerdos del evento y manten el acceso
+            Usa un álbum compartido para recopilar recuerdos del evento y mantén el acceso
             siempre actualizado desde este panel.
           </p>
 
           <div class="mb-3">
-            <label class="form-label custom-label">Link del album compartido</label>
+            <label class="form-label custom-label">Link del álbum compartido</label>
             <input
               type="url"
               class="form-control custom-input"
@@ -44,20 +44,20 @@
           </div>
 
           <div class="button-row">
-            <button class="btn primary-btn" (click)="guardarLink()">Guardar link</button>
+            <button class="btn primary-btn" (click)="guardarLink()">Guardar enlace</button>
             <button class="btn secondary-btn" (click)="mostrarInstrucciones = !mostrarInstrucciones">
-              {{ mostrarInstrucciones ? 'Ocultar instrucciones' : 'Como obtener el link' }}
+              {{ mostrarInstrucciones ? 'Ocultar instrucciones' : 'Cómo obtener el enlace' }}
             </button>
           </div>
         </section>
 
         <section class="config-panel info-panel">
           <span class="config-kicker">Sugerencia</span>
-          <h2>Buenas practicas</h2>
+          <h2>Buenas prácticas</h2>
           <ul class="tips-list">
-            <li>Usa un album dedicado al evento para mantener ordenadas todas las fotos.</li>
-            <li>Activa colaboracion antes de compartir el enlace con los invitados.</li>
-            <li>Verifica que el link abra correctamente en modo publico o compartido.</li>
+            <li>Usa un álbum dedicado al evento para mantener ordenadas todas las fotos.</li>
+            <li>Activa la colaboración antes de compartir el enlace con los invitados.</li>
+            <li>Verifica que el enlace abra correctamente en modo público o compartido.</li>
           </ul>
         </section>
       </div>
@@ -65,7 +65,7 @@
       @if (mostrarInstrucciones) {
         <section class="config-panel instructions-panel mt-4">
           <span class="config-kicker">Paso a paso</span>
-          <h2>Como obtener el link de Google Photos</h2>
+          <h2>Cómo obtener el enlace de Google Photos</h2>
 
           <ol class="instrucciones">
             <li>
@@ -74,29 +74,29 @@
             </li>
 
             <li>
-              <strong>Crea un nuevo album</strong>
-              <p>Haz clic en "Albumes", luego en "Crear album" y ponle un nombre claro.</p>
+              <strong>Crea un nuevo álbum</strong>
+              <p>Haz clic en "Álbumes", luego en "Crear álbum" y ponle un nombre claro.</p>
             </li>
 
             <li>
-              <strong>Activa la colaboracion</strong>
-              <p>Dentro del album, usa el boton de compartir y habilita la opcion para que otros agreguen fotos.</p>
+              <strong>Activa la colaboración</strong>
+              <p>Dentro del álbum, usa el botón de compartir y habilita la opción para que otros agreguen fotos.</p>
             </li>
 
             <li>
-              <strong>Copia el link</strong>
+              <strong>Copia el enlace</strong>
               <p>Selecciona "Obtener enlace" o "Copiar enlace".</p>
-              <p>El formato normalmente se vera asi: <code>https://photos.app.goo.gl/xxxxx</code></p>
+              <p>El formato normalmente se verá así: <code>https://photos.app.goo.gl/xxxxx</code></p>
             </li>
 
             <li>
-              <strong>Pegalo en este panel</strong>
-              <p>Guarda el enlace para que quede disponible en la invitacion.</p>
+              <strong>Pégalo en este panel</strong>
+              <p>Guarda el enlace para que quede disponible en la invitación.</p>
             </li>
           </ol>
 
           <div class="note-banner">
-            <strong>Importante:</strong> confirma que la colaboracion este activa para que los invitados puedan subir sus fotos sin problemas.
+            <strong>Importante:</strong> confirma que la colaboración esté activa para que los invitados puedan subir sus fotos sin problemas.
           </div>
         </section>
       }

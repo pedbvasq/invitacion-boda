@@ -35,7 +35,7 @@ export class Fotos implements OnInit {
 
   abrirGooglePhotos() {
     if (!this.googlePhotosLink) {
-      alert(this.lang.isEnglish() ? 'Google Photos link is not configured yet' : 'El link de Google Photos no esta configurado');
+      alert(this.lang.isEnglish() ? 'Google Photos link is not configured yet' : 'El enlace de Google Photos no está configurado');
       return;
     }
     window.open(this.googlePhotosLink, '_blank');

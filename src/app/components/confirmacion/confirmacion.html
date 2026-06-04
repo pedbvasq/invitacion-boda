@@ -8,16 +8,16 @@
   }
 
   @if (!loading && !guestId) {
-    <h2 class="titulo">{{ lang.isEnglish() ? 'Attendance confirmation' : 'Confirmacion de asistencia' }}</h2>
+    <h2 class="titulo">{{ lang.isEnglish() ? 'Attendance confirmation' : 'Confirmación de asistencia' }}</h2>
     <p class="frase">
       {{ lang.isEnglish()
         ? 'To confirm your attendance, please use the personalized link you received.'
-        : 'Para confirmar tu asistencia, utiliza el link personalizado que recibiste' }}
+        : 'Para confirmar tu asistencia, utiliza el enlace personalizado que recibiste' }}
     </p>
   }
 
   @if (guest && !loading && !error) {
-    <h2 class="titulo">{{ lang.isEnglish() ? 'Attendance confirmation' : 'Confirmacion de asistencia' }}</h2>
+    <h2 class="titulo">{{ lang.isEnglish() ? 'Attendance confirmation' : 'Confirmación de asistencia' }}</h2>
 
     <div class="guest-info">
       <h3>{{guest.nombres}} {{guest.apellidos}}</h3>
@@ -29,29 +29,29 @@
         } @else {
           {{ lang.isEnglish()
             ? 'Please choose if you will attend.'
-            : 'Elige si asistiras al evento.' }}
+            : 'Elige si asistirás al evento.' }}
         }
       </p>
     </div>
 
     @if (!confirmado) {
       <div class="form-group">
-        <label class="radio-title">{{ lang.isEnglish() ? 'Will you attend?' : 'Asistiras?' }}</label>
+        <label class="radio-title">{{ lang.isEnglish() ? 'Will you attend?' : '¿Asistirás?' }}</label>
         <div class="radio-group">
           <label>
             <input type="radio" name="asistencia" value="si" [(ngModel)]="asistenciaSeleccionada">
-            {{ lang.isEnglish() ? 'Yes, I will attend' : 'Si, asistire' }}
+            {{ lang.isEnglish() ? 'Yes, I will attend' : 'Sí, asistiré' }}
           </label>
           <label>
             <input type="radio" name="asistencia" value="no" [(ngModel)]="asistenciaSeleccionada">
-            {{ lang.isEnglish() ? 'No, I will not attend' : 'No, no asistire' }}
+            {{ lang.isEnglish() ? 'No, I will not attend' : 'No, no asistiré' }}
           </label>
         </div>
       </div>
 
       @if (asistenciaSeleccionada === 'si' && guest.cupoPermitido > 0) {
         <div class="form-group">
-          <label class="radio-title">{{ lang.isEnglish() ? 'How many people will attend?' : 'Cuantas personas asistiran?' }}</label>
+          <label class="radio-title">{{ lang.isEnglish() ? 'How many people will attend?' : '¿Cuántas personas asistirán?' }}</label>
           <select class="form-control" [(ngModel)]="personasConfirmadas">
             @for (num of personasOptions; track num) {
               <option [value]="num">{{num}}</option>
@@ -64,7 +64,7 @@
         <p class="frase">
           {{ lang.isEnglish()
             ? 'Your attendance will be registered with this response.'
-            : 'Tu asistencia quedara registrada con esta respuesta.' }}
+            : 'Tu asistencia quedará registrada con esta respuesta.' }}
         </p>
       }
 
@@ -81,7 +81,7 @@
         } @else {
           {{ lang.isEnglish()
             ? 'Thank you for your response. We are sorry you cannot join us.'
-            : 'Gracias por responder. Lamentamos que no puedas acompanarnos.' }}
+            : 'Gracias por responder. Lamentamos que no puedas acompañarnos.' }}
         }
       </p>
     }
@@ -89,8 +89,8 @@
 
   @if (error && !loading) {
     <div class="alert alert-danger text-center">
-      <h4>{{ lang.isEnglish() ? 'Invitation not found' : 'Invitacion no encontrada' }}</h4>
-      <p>{{ lang.isEnglish() ? 'The invitation link is not valid.' : 'El link de invitacion no es valido.' }}</p>
+      <h4>{{ lang.isEnglish() ? 'Invitation not found' : 'Invitación no encontrada' }}</h4>
+      <p>{{ lang.isEnglish() ? 'The invitation link is not valid.' : 'El enlace de invitación no es válido.' }}</p>
     </div>
   }
 </section>
