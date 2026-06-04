@@ -52,7 +52,7 @@ export class Invitation implements OnInit, AfterViewInit {
 
   // Datos
   nombreCompleto1 = 'Hugo';
-  nombreCompleto2 = 'Maria';
+  nombreCompleto2 = 'María';
   inicial1 = 'H';
   inicial2 = 'M';
 
