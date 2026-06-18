@@ -3,6 +3,7 @@
   min-height: 70vh;
   background: #fff;
   padding: 0;
+  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,12 +12,12 @@
 
 .gallery-container {
   width: 100%;
-  height: 100%;
+  height: 70vh;
 }
 
 .gallery-image {
   width: 100%;
-  height: 100%;
+  height: 70vh;
   object-fit: cover;
   opacity: 0;
   transform: translateX(-100px);
@@ -67,5 +68,10 @@
 @media (min-width: 768px) {
   .gallery-section {
     min-height: 80vh;
+  }
+
+  .gallery-container,
+  .gallery-image {
+    height: 80vh;
   }
 }
